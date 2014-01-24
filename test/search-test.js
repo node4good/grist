@@ -5,7 +5,7 @@ var safe = require('safe');
 var loremIpsum = require('lorem-ipsum');
 var tutils = require("./utils");
 
-var num = 1000;
+var NUMBER_OF_DOCS = 1000;
 var gt0sin = 0;
 var _dt = null;
 
@@ -31,7 +31,7 @@ describe('Search', function () {
         });
         before(function (done) {
             var i = 1;
-            async.whilst(function () { return i <= num; },
+            async.whilst(function () { return i <= NUMBER_OF_DOCS; },
                 function (cb) {
                     var d = new Date();
                     if (_dt === null)
@@ -55,7 +55,7 @@ describe('Search', function () {
         });
         it("Has right size", function (done) {
             collection.count(safe.sure(done, function (count) {
-                assert.equal(count, num);
+                assert.equal(count, NUMBER_OF_DOCS);
                 done();
             }));
         });
@@ -161,7 +161,7 @@ describe('Search', function () {
         });
         it("find {num:{$ne:10}} (index)", function (done) {
             collection.find({num: {$ne: 10}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, num - 1);
+                assert.equal(docs.length, NUMBER_OF_DOCS - 1);
                 _.each(docs, function (doc) {
                     assert.ok(doc.num != 10);
                 });
@@ -170,7 +170,7 @@ describe('Search', function () {
         });
         it("find {num:{$not:{$eq:10}}} (index)", function (done) {
             collection.find({num: {$ne: 10}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, num - 1);
+                assert.equal(docs.length, NUMBER_OF_DOCS - 1);
                 _.each(docs, function (doc) {
                     assert.ok(doc.num != 10);
                 });
@@ -179,7 +179,7 @@ describe('Search', function () {
         });
         it("find {pum:{$ne:10}} (no index)", function (done) {
             collection.find({pum: {$ne: 10}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, num - 1);
+                assert.equal(docs.length, NUMBER_OF_DOCS - 1);
                 _.each(docs, function (doc) {
                     assert.ok(doc.pum != 10);
                 });
@@ -206,7 +206,7 @@ describe('Search', function () {
         });
         it("find {num:{$nin:[10,20,30,40]}} (index)", function (done) {
             collection.find({num: {$nin: [10, 20, 30, 40]}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, num - 4);
+                assert.equal(docs.length, NUMBER_OF_DOCS - 4);
                 _.each(docs, function (doc) {
                     assert.ok(doc.num != 10 && doc.num != 20 && doc.num != 30 && doc.num != 40);
                 });
@@ -215,7 +215,7 @@ describe('Search', function () {
         });
         it("find {pum:{$nin:[10,20,30,40]}} (no index)", function (done) {
             collection.find({pum: {$nin: [10, 20, 30, 40]}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, num - 4);
+                assert.equal(docs.length, NUMBER_OF_DOCS - 4);
                 _.each(docs, function (doc) {
                     assert.ok(doc.pum != 10 && doc.pum != 20 && doc.pum != 30 && doc.pum != 40);
                 });
