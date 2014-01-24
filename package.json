@@ -1,33 +1,33 @@
 {
-  "author": "Refael Ackermann<refael@empeeric.com>",
-  "name": "puny",
-  "version": "0.0.0",
-  "description": "Embedded Node.js document store upward compatible with MongoDB",
-  "keywords": [
-    "database",
-    "datastore",
-    "embedded",
-    "mongodb",
-    "yaml"
-  ],
-  "main": "./lib/main",
-  "engines": {
-    "node": ">= 0.11.x"
-  },
-  "dependencies": {
-    "lodash": ""
-  },
-  "scripts": {
-      "test": "mocha"
-  },
-  "devDependencies": {
-	"csv": "",
-	"temp": "0.4.x",
-	"vows": "",
-	"lorem-ipsum":"",
-	"optimist":"",
-	"step":"",
-	"benchmark":"",
-	"mocha":""
-  }
+    "author": "Refael Ackermann<refael@empeeric.com>",
+    "name": "puny",
+    "version": "0.0.0",
+    "description": "Embedded Node.js document store upward compatible with MongoDB",
+    "keywords": [
+        "database",
+        "datastore",
+        "embedded",
+        "mongodb",
+        "yaml"
+    ],
+    "main": "./lib/index",
+    "engines": {
+        "node": ">= 0.11.x"
+    },
+    "dependencies": {
+        "lodash": ""
+    },
+    "scripts": {
+        "test": "mocha"
+    },
+    "devDependencies": {
+        "csv": "",
+        "temp": "0.4.x",
+        "vows": "",
+        "lorem-ipsum": "",
+        "optimist": "",
+        "step": "",
+        "benchmark": "",
+        "mocha": ""
+    }
 }

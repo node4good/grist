@@ -5,35 +5,38 @@
  * @_function remove
  * @ignore
  */
-exports.shouldRemoveAllDocumentsNoSafe = function(configuration, test) {
-  var db = configuration.newDbInstance({w:0}, {poolSize:1});
+exports.shouldRemoveAllDocumentsNoSafe = function (configuration, test) {
+    var db = configuration.newDbInstance({w: 0}, {poolSize: 1});
 
-  // DOC_LINE var db = new Db('test', new Server('locahost', 27017));
-  // DOC_START
-  // Establish connection to db  
-  db.open(function(err, db) {
-    
-    // Fetch a collection to insert document into
-    db.collection("remove_all_documents_no_safe", function(err, collection) {
-      
-      // Insert a bunch of documents
-      collection.insert([{a:1}, {b:2}], {w:1}, function(err, result) {
-        test.equal(null, err);
-        
-        // Remove all the document
-        collection.remove();
-        
-        // Fetch all results
-        collection.find().toArray(function(err, items) {
-          test.equal(null, err);
-          test.equal(0, items.length);
-          db.close();
-          test.done();
-        });
-      });
-    })
-  });  
-  // DOC_END
+    // DOC_LINE var db = new Db('test', new Server('locahost', 27017));
+    // DOC_START
+    // Establish connection to db
+    db.open(function (err, db) {
+
+        // Fetch a collection to insert document into
+        db.collection("remove_all_documents_no_safe", function (err, collection) {
+
+            // Insert a bunch of documents
+            collection.insert([
+                {a: 1},
+                {b: 2}
+            ], {w: 1}, function (err, result) {
+                test.equal(null, err);
+
+                // Remove all the document
+                collection.remove();
+
+                // Fetch all results
+                collection.find().toArray(function (err, items) {
+                    test.equal(null, err);
+                    test.equal(0, items.length);
+                    db.close();
+                    test.done();
+                });
+            });
+        })
+    });
+    // DOC_END
 }
 
 /**
@@ -43,108 +46,116 @@ exports.shouldRemoveAllDocumentsNoSafe = function(configuration, test) {
  * @_function remove
  * @ignore
  */
-exports.shouldRemoveSubsetOfDocumentsSafeMode = function(configuration, test) {
-  var db = configuration.newDbInstance({w:0}, {poolSize:1});
+exports.shouldRemoveSubsetOfDocumentsSafeMode = function (configuration, test) {
+    var db = configuration.newDbInstance({w: 0}, {poolSize: 1});
 
-  // DOC_LINE var db = new Db('test', new Server('locahost', 27017));
-  // DOC_START
-  // Establish connection to db  
-  db.open(function(err, db) {
-    
-    // Fetch a collection to insert document into
-    db.collection("remove_subset_of_documents_safe", function(err, collection) {
-      
-      // Insert a bunch of documents
-      collection.insert([{a:1}, {b:2}], {w:1}, function(err, result) {
-        test.equal(null, err);
-        
-        // Remove all the document
-        collection.remove({a:1}, {w:1}, function(err, numberOfRemovedDocs) {
-          test.equal(null, err);
-          test.equal(1, numberOfRemovedDocs);
-          db.close();
-          test.done();
-        });        
-      });
-    })
-  });  
-  // DOC_END
-}
+    // DOC_LINE var db = new Db('test', new Server('locahost', 27017));
+    // DOC_START
+    // Establish connection to db
+    db.open(function (err, db) {
 
-/**
- * @ignore
- */
-exports.shouldCorrectlyClearOutCollection = function(configuration, test) {
-  var client = configuration.db();
+        // Fetch a collection to insert document into
+        db.collection("remove_subset_of_documents_safe", function (err, collection) {
 
-  client.createCollection('test_clear', function(err, r) {
-    client.collection('test_clear', function(err, collection) {
-      collection.insert({i:1}, {w:1}, function(err, ids) {
-        collection.insert({i:2}, {w:1}, function(err, ids) {
-          collection.count(function(err, count) {
-            test.equal(2, count);
-            // Clear the collection
-            collection.remove({}, {w:1}, function(err, result) {
-              test.equal(2, result);
-              
-              collection.count(function(err, count) {
-                test.equal(0, count);
-                // Let's close the db
-                test.done();
-              });
+            // Insert a bunch of documents
+            collection.insert([
+                {a: 1},
+                {b: 2}
+            ], {w: 1}, function (err, result) {
+                test.equal(null, err);
+
+                // Remove all the document
+                collection.remove({a: 1}, {w: 1}, function (err, numberOfRemovedDocs) {
+                    test.equal(null, err);
+                    test.equal(1, numberOfRemovedDocs);
+                    db.close();
+                    test.done();
+                });
             });
-          });
-        });
-      });
+        })
     });
-  });    
+    // DOC_END
 }
 
 /**
  * @ignore
  */
-exports.shouldCorrectlyRemoveDocumentUsingRegExp = function(configuration, test) {
-  var client = configuration.db();
+exports.shouldCorrectlyClearOutCollection = function (configuration, test) {
+    var client = configuration.db();
 
-  client.createCollection('test_remove_regexp', function(err, r) {
-    client.collection('test_remove_regexp', function(err, collection) {
-      collection.insert({address:'485 7th ave new york'}, {w:1}, function(err, ids) {
-        // Clear the collection
-        collection.remove({address:/485 7th ave/}, {w:1}, function(err, result) {
-          test.equal(1, result);
-          
-          collection.count(function(err, count) {
-            test.equal(0, count);
-            // Let's close the db
-            test.done();
-          });
+    client.createCollection('test_clear', function (err, r) {
+        client.collection('test_clear', function (err, collection) {
+            collection.insert({i: 1}, {w: 1}, function (err, ids) {
+                collection.insert({i: 2}, {w: 1}, function (err, ids) {
+                    collection.count(function (err, count) {
+                        test.equal(2, count);
+                        // Clear the collection
+                        collection.remove({}, {w: 1}, function (err, result) {
+                            test.equal(2, result);
+
+                            collection.count(function (err, count) {
+                                test.equal(0, count);
+                                // Let's close the db
+                                test.done();
+                            });
+                        });
+                    });
+                });
+            });
         });
-      });
     });
-  });    
 }
 
 /**
  * @ignore
  */
-exports.shouldCorrectlyRemoveOnlyFirstDocument = function(configuration, test) {
-  var client = configuration.db();
+exports.shouldCorrectlyRemoveDocumentUsingRegExp = function (configuration, test) {
+    var client = configuration.db();
 
-  client.createCollection('shouldCorrectlyRemoveOnlyFirstDocument', function(err, r) {
-    client.collection('shouldCorrectlyRemoveOnlyFirstDocument', function(err, collection) {
-      collection.insert([{a:1}, {a:1}, {a:1}, {a:1}], {w:1}, function(err, result) {
-        test.equal(null, err);
-        
-        // Remove the first
-        collection.remove({a:1}, {w:1, single:true}, function(err, number) {
-          test.equal(1, number);
-          
-          collection.find({a:1}).count(function(err, result) {
-            test.equal(3, result);
-            test.done();
-          });
+    client.createCollection('test_remove_regexp', function (err, r) {
+        client.collection('test_remove_regexp', function (err, collection) {
+            collection.insert({address: '485 7th ave new york'}, {w: 1}, function (err, ids) {
+                // Clear the collection
+                collection.remove({address: /485 7th ave/}, {w: 1}, function (err, result) {
+                    test.equal(1, result);
+
+                    collection.count(function (err, count) {
+                        test.equal(0, count);
+                        // Let's close the db
+                        test.done();
+                    });
+                });
+            });
         });
-      });
     });
-  });    
+}
+
+/**
+ * @ignore
+ */
+exports.shouldCorrectlyRemoveOnlyFirstDocument = function (configuration, test) {
+    var client = configuration.db();
+
+    client.createCollection('shouldCorrectlyRemoveOnlyFirstDocument', function (err, r) {
+        client.collection('shouldCorrectlyRemoveOnlyFirstDocument', function (err, collection) {
+            collection.insert([
+                {a: 1},
+                {a: 1},
+                {a: 1},
+                {a: 1}
+            ], {w: 1}, function (err, result) {
+                test.equal(null, err);
+
+                // Remove the first
+                collection.remove({a: 1}, {w: 1, single: true}, function (err, number) {
+                    test.equal(1, number);
+
+                    collection.find({a: 1}).count(function (err, result) {
+                        test.equal(3, result);
+                        test.done();
+                    });
+                });
+            });
+        });
+    });
 }

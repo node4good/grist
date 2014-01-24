@@ -1,0 +1,23 @@
+{
+    "forin": true,
+    "freeze": true,
+    "immed": true,
+    "newcap": true,
+    "noarg": true,
+    "noempty": true,
+    "nonew": true,
+    "undef": true,
+    "trailing": true,
+    "unused": true,
+    "maxdepth": 4,
+    "scripturl": true,
+    "sub": true,
+    "supernew": true,
+    "node": true,
+    "globals": {
+        "describe": true,
+        "before": true,
+        "after": true,
+        "it": true
+    }
+}
