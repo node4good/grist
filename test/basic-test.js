@@ -1,6 +1,7 @@
 var assert = require('assert');
 var _ = require('lodash');
 var safe = require('safe');
+var Promise = require('mpromise');
 
 var loremIpsum = require('lorem-ipsum');
 var tutils = require("./utils");
@@ -12,43 +13,46 @@ var _id = null;
 
 
 describe('Basic', function () {
+    this.timeout(60 * 60 * 1000);
     describe('New store', function () {
-        var db, coll;
-        before(function (done) {
-            tutils.getDb('test', true, safe.sure(done, function (_db) {
-                db = _db;
-                done();
-            }));
+        before("open DB", function (done) {
+            tutils.getDb('test', true, function (err, _db) {
+                this.db = _db;
+                this.db.collection("test", {}, function (err, _coll) {
+                    this.coll = _coll;
+                    done();
+                });
+            });
         });
-        it("Create new collection", function (done) {
-            db.collection("test", {}, safe.sure(done, function (_coll) {
-                coll = _coll;
-                done();
-            }));
-        });
-        it("Populated with test data", function () {
+        it("Populated with test data", function (done) {
+            var p = new Promise;
+            p.fulfill();
             gt0sin = 0;
             _dt = null;
-            for (var i = 0; i < num; i++) {
+            _.times(num, function (i) {
                 var d;
                 if (!_dt) _dt = d = new Date();
                 else d = new Date(_dt.getTime() + 1000 * i);
                 var obj = {_dt: d, dum: parseInt(i / 2), num: i, pum: i, sub: {num: i}, sin: Math.sin(i), cos: Math.cos(i), t: 15, junk: loremIpsum({count: 1, units: "paragraphs"})};
                 obj.txt = obj.sin > 0 && "больше нуля" || obj.sin < 0 && "меньше нуля" || "ноль";
-                coll.insert(obj);
                 if (obj.sin > 0 && obj.sin < 0.5)
                     gt0sin++;
-                i++;
-            }
+                p = p.then(function () {
+                    return this.coll.insert(obj);
+                });
+            });
+            p.then(function () { done(); }).end();
         });
         it("Has right size", function (done) {
-            coll.count(safe.sure(done, function (count) {
+            this.coll.count(function (err, count) {
                 assert.equal(count, num);
-                done();
-            }));
+                done(err);
+            });
         });
         after(function (done) {
-            db.close(done);
+            this.db.close(done);
+            delete this.colll;
+            delete this.db;
         });
     });
     describe('Existing store', function () {

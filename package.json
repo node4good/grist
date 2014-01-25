@@ -15,7 +15,9 @@
         "node": ">= 0.11.x"
     },
     "dependencies": {
-        "lodash": ""
+        "lodash": "",
+        "promised-io": "",
+        "mpromise": ""
     },
     "scripts": {
         "test": "mocha"
