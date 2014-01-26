@@ -89,6 +89,7 @@ describe('Basic', function () {
         });
         it("utf8 text", function (done) {
             coll.find({ sin: { $gt: 0 } }).toArray(safe.sure(done, function (docs) {
+                assert(!_.isEmpty(docs));
                 docs.forEach(function (doc) {
                     assert.equal(doc.txt, "greater than zero");
                 });
@@ -97,10 +98,11 @@ describe('Basic', function () {
         });
         it("find $eq", function (done) {
             coll.find({num: 10}).toArray(safe.sure(done, function (docs) {
-                _id = docs[0]._id;
-                assert.equal(docs[0].num, 10);
+                var doc = docs[0];
+                _id = doc._id;
+                assert.equal(doc.num, 10);
                 assert.equal(docs.length, 1);
-                assert.equal(_.isDate(docs[0]._dt), true);
+                assert.equal(_.isDate(doc._dt), true);
                 done();
             }));
         });

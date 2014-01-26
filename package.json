@@ -19,7 +19,9 @@
         "safe": "",
         "async": "",
         "mpromise": "beta",
-        "then-fs": ""
+        "then-fs": "",
+        "bson": "~0.2.5",
+        "json5": "~0.2.0"
     },
     "scripts": {
         "test": "mocha"
