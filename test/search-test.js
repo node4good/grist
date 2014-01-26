@@ -1,9 +1,10 @@
+"use strict";
 var assert = require('assert');
 var _ = require('lodash');
-var async = require('async');
 var safe = require('safe');
-var loremIpsum = require('lorem-ipsum');
+var lipsum = require('lorem-ipsum');
 var tutils = require("./utils");
+var Promise = require('mpromise');
 
 var NUMBER_OF_DOCS = 1000;
 var gt0sin = 0;
@@ -12,59 +13,71 @@ var _dt = null;
 var words = ["Sergey Brin", "Serg Kosting", "Pupking Sergey", "Munking Sirgey"];
 
 describe('Search', function () {
+    this.timeout(60 * 60 * 1000);
     describe('New store', function () {
         var db, collection;
         before(function (done) {
-            tutils.getDb('test', true, safe.sure(done, function (_db) {
+            tutils.getDb('test', true, function (err, _db) {
+                if (err) return done(err);
                 db = _db;
-                done();
-            }));
+                db.collection("test1", {}, function (err, _coll) {
+                    if (err) return done(err);
+                    collection = _coll;
+                    collection.ensureIndex({num: 1}, {sparse: false, unique: false}, function (err, name) {
+                        if (err) return done(err);
+                        assert.ok(name);
+                        var p = new Promise;
+                        p.fulfill();
+                        _.times(NUMBER_OF_DOCS, function (i) {
+                            var timestamp = new Date();
+                            if (_dt === null) _dt = timestamp;
+                            var obj = {
+                                _dt: timestamp,
+                                anum: [i, i + 1, i + 2],
+                                apum: [i, i + 1, i + 2],
+                                num: i,
+                                pum: i,
+                                sub: { num: i },
+                                sin: Math.sin(i),
+                                cos: Math.cos(i),
+                                t: 15,
+                                junk: lipsum({ count: 5, units: "words" }) +
+                                    words[i % words.length] +
+                                    lipsum({ count: 5, units: "words" })
+                            };
+                            if (i % 7 === 0) {
+                                obj.words = words;
+                                delete obj.num;
+                                delete obj.pum;
+                            }
+                            if (obj.sin > 0 && obj.sin < 0.5) gt0sin++;
+                            p = p.then(function () {
+                                return collection.insert(obj);
+                            });
+                        });
+                        p.then(
+                            function () {
+                                done();
+                            }
+                        ).end();
+                    });
+                });
+            });
         });
-        before(function (done) {
-            db.collection("test1", {}, safe.sure(done, function (_coll) {
-                collection = _coll;
-                collection.ensureIndex({num: 1}, {sparse: false, unique: false}, safe.sure(done, function (name) {
-                    assert.ok(name);
-                    done();
-                }));
-            }));
-        });
-        before(function (done) {
-            var i = 1;
-            async.whilst(function () { return i <= NUMBER_OF_DOCS; },
-                function (cb) {
-                    var d = new Date();
-                    if (_dt === null)
-                        _dt = d;
-                    var obj = { _dt: d, anum: [i, i + 1, i + 2], apum: [i, i + 1, i + 2], num: i, pum: i,
-                        sub: { num: i }, sin: Math.sin(i), cos: Math.cos(i), t: 15,
-                        junk: loremIpsum({ count: 5, units: "words" }) + words[i % words.length] + loremIpsum({ count: 5, units: "words" })
-                    };
-                    if (i % 7 === 0) {
-                        obj.words = words;
-                        delete obj.num;
-                        delete obj.pum;
-                    }
-                    collection.insert(obj, cb);
-                    if (obj.sin > 0 && obj.sin < 0.5)
-                        gt0sin++;
-                    i++;
-                },
-                safe.sure(done, done)
-            );
-        });
+
+
         it("Has right size", function (done) {
-            collection.count(safe.sure(done, function (count) {
+            collection.count(function (err, count) {
                 assert.equal(count, NUMBER_OF_DOCS);
-                done();
-            }));
+                done(err);
+            });
         });
         it("find {num:10} (index)", function (done) {
-            collection.find({num: 10}).toArray(safe.sure(done, function (docs) {
+            collection.find({num: 10}).toArray(function (err, docs) {
                 assert.equal(docs.length, 1);
                 assert.equal(docs[0].num, 10);
-                done();
-            }));
+                done(err);
+            });
         });
         it("find {num:{$not:{$ne:10}}} (index)", function (done) {
             collection.find({num: {$not: {$ne: 10}}}).toArray(safe.sure(done, function (docs) {
@@ -125,7 +138,7 @@ describe('Search', function () {
         });
         it("find {num:{$gt:10}} (index)", function (done) {
             collection.find({num: {$gt: 10}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, 849);
+                assert.equal(docs.length, 848);
                 _.each(docs, function (doc) {
                     assert.ok(doc.num > 10);
                 });
@@ -134,7 +147,7 @@ describe('Search', function () {
         });
         it("find {pum:{$gt:10}} (no index)", function (done) {
             collection.find({pum: {$gt: 10}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, 849);
+                assert.equal(docs.length, 848);
                 _.each(docs, function (doc) {
                     assert.ok(doc.pum > 10);
                 });
@@ -143,7 +156,7 @@ describe('Search', function () {
         });
         it("find {num:{$gte:10}} (index)", function (done) {
             collection.find({num: {$gte: 10}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, 850);
+                assert.equal(docs.length, 849);
                 _.each(docs, function (doc) {
                     assert.ok(doc.num >= 10);
                 });
@@ -152,7 +165,7 @@ describe('Search', function () {
         });
         it("find {pum:{$gte:10}} (no index)", function (done) {
             collection.find({pum: {$gte: 10}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, 850);
+                assert.equal(docs.length, 849);
                 _.each(docs, function (doc) {
                     assert.ok(doc.pum >= 10);
                 });
@@ -246,12 +259,12 @@ describe('Search', function () {
                 {num: 6},
                 {num: 11}
             ]}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, 2);
-                _.each(docs, function (doc) {
-                    assert.ok(doc.num < 10);
-                });
-                done();
-            }));
+                    assert.equal(docs.length, 2);
+                    _.each(docs, function (doc) {
+                        assert.ok(doc.num < 10);
+                    });
+                    done();
+                }));
         });
         it("find {num:{$lt:10},$nor:[{num:5},{num:6},{num:7}", function (done) {
             collection.find({num: {$lt: 10}, $nor: [
@@ -259,12 +272,12 @@ describe('Search', function () {
                 {num: 6},
                 {num: 7}
             ]}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, 6);
-                _.each(docs, function (doc) {
-                    assert.ok(doc.num < 10);
-                });
-                done();
-            }));
+                    assert.equal(docs.length, 6);
+                    _.each(docs, function (doc) {
+                        assert.ok(doc.num < 10);
+                    });
+                    done();
+                }));
         });
         it("find {'anum':{$all:[1,2,3]}} (index)", function (done) {
             collection.find({'anum': {$all: [1, 2, 3]}}).toArray(safe.sure(done, function (docs) {
@@ -280,25 +293,25 @@ describe('Search', function () {
         });
         it("find {'pum':{$exists:false}} (no index)", function (done) {
             collection.find({'pum': {$exists: false}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, 142);
+                assert.equal(docs.length, 143);
                 done();
             }));
         });
         it("find {'num':{$exists:false}} (index)", function (done) {
             collection.find({'num': {$exists: false}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, 142);
+                assert.equal(docs.length, 143);
                 done();
             }));
         });
         it("find {'pum':{$exists:true}} (no index)", function (done) {
             collection.find({'pum': {$exists: true}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, 858);
+                assert.equal(docs.length, 857);
                 done();
             }));
         });
         it("find {'num':{$exists:true}} (index)", function (done) {
             collection.find({'num': {$exists: true}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, 858);
+                assert.equal(docs.length, 857);
                 done();
             }));
         });
@@ -334,7 +347,7 @@ describe('Search', function () {
         });
         it("find {'words':{$all:[/sirgey/i,/sergey/i]}}", function (done) {
             collection.find({'words': {$all: [/sirgey/i, /sergey/i]}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, 142);
+                assert.equal(docs.length, 143);
                 done();
             }));
         });

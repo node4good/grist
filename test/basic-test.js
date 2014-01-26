@@ -14,9 +14,7 @@ var _id = null;
 
 
 describe('Basic', function () {
-    this.timeout(60 * 60 * 1000);
     describe('New store', function () {
-
         before(function (done) {
             var test = this;
             tutils.getDb('test', true, function (err, _db) {
