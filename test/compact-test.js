@@ -117,7 +117,7 @@ describe('Compact', function () {
     it('Check data after reopening db', checkData);
     it('Check collection size', function (done) {
         fs.stat(coll._filename, safe.sure(done, function (stats) {
-            assert(stats.size < fsize);
+            assert(stats.size <= fsize, stats.size + " should be less than " + fsize);
             done();
         }));
     });
@@ -185,17 +185,23 @@ describe('Update+Hash', function () {
 });
 
 describe('Store', function () {
-    var db, coll, fsize;
     it('Operations must fail if db is linked to not existent path', function (done) {
         var Db = tingodb.Db;
-        var db = new Db('/tmp/some_unexistant_path_667676qwe', {})
+        var db;
+        try {
+            db = new Db('/tmp/some_unexistant_path_667676qwe', {});
+        } catch (e) {
+            assert(e);
+            done();
+            return;
+        }
         var c = db.collection('test');
         c.remove({}, function (err) {
-            assert(err)
+            assert(err);
             c.insert({  name: 'Chiara', surname: 'Mobily', age: 22 }, function (err) {
                 assert(err);
                 done();
-            })
-        })
+            });
+        });
     });
 });

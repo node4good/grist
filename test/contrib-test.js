@@ -1,27 +1,18 @@
+/*global console,afterEach */
 var tutils = require('./utils');
 
 var config = function (options) {
     return function () {
         var self = this;
-        options = options != null ? options : {};
-        var db = tutils.getDbSync('test', {w: 0, native_parser: false}, {auto_reconnect: false, poolSize: 4}, true);
-
-        // Server Manager options
-        var server_options = {
-            purgedirectories: true
-        }
-
-        // Merge in any options
-        for (var name in options) {
-            server_options[name] = options[name];
-        }
+        options = options || {};
+        var db = tutils.getDbSync('test', { w: 0, native_parser: false }, { auto_reconnect: false, poolSize: 4 }, true);
 
         // Test suite start
-        this.start = function (callback) {
+        self.start = function (callback) {
             tutils.openEmpty(db, callback);
         };
 
-        this.restart = function (callback) {
+        self.restart = function (callback) {
             self.stop(function (err) {
                 if (err) callback(err);
                 else self.start(callback);
@@ -29,41 +20,40 @@ var config = function (options) {
         };
 
         // Test suite stop
-        this.stop = function (callback) {
+        self.stop = function (callback) {
             db.close(callback);
         };
 
         // Pr test functions
-        this.setup = function (callback) { callback(); }
-        this.teardown = function (callback) { callback(); };
+        self.setup = function (callback) { callback(); };
+        self.teardown = function (callback) { callback(); };
 
         // Returns the package for using Mongo driver classes
-        this.getMongoPackage = function () {
-            return tutils.getDbPackage();
-        }
+        self.getMongoPackage = function () {
+            return require('mongodb');
+        };
 
-
-        this.newDbInstance = function (db_options, server_options) {
+        self.newDbInstance = function (db_options, server_options) {
             return tutils.getDbSync("test", db_options, server_options, true);
-        }
+        };
 
         // Returns a db
-        this.db = function () {
+        self.db = function () {
             return db;
-        }
+        };
 
-        this.url = function (user, password) {
+        self.url = function (user, password) {
             if (user) {
                 return 'mongodb://' + user + ':' + password + '@localhost:27017/' + self.db_name + '?safe=false';
             }
 
             return 'mongodb://localhost:27017/' + self.db_name + '?safe=false';
-        }
+        };
 
         // Used in tests
-        this.db_name = "test";
-    }
-}
+        self.db_name = "test";
+    };
+};
 
 
 var assert = require('assert');
@@ -87,7 +77,8 @@ var slow = {
     'shouldStream10KDocuments': 60000
 };
 
-describe('contrib', function () {
+describe.none = function () {};
+describe.none('contrib', function () {
     var names;
     var configuration;
     this.timeout(10000);
@@ -103,7 +94,8 @@ describe('contrib', function () {
                 if (typeof fn != 'function') return;
                 describe(name, function () {
                     var done;
-                    if (slow[name]) this.timeout(slow[name]);
+                    var test = this;
+                    if (slow[name]) test.timeout(slow[name]);
                     it('test', function (_done) {
                         done = _done;
                         if (names[name]) {
