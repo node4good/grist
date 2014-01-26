@@ -92,7 +92,7 @@ describe('Basic', function () {
         it("utf8 text", function (done) {
             coll.find({ sin: { $gt: 0 } }).toArray(safe.sure(done, function (docs) {
                 docs.forEach(function (doc) {
-                    assert.equal(doc.txt, "больше нуля");
+                    assert.equal(doc.txt, "greater than zero");
                 });
                 done();
             }));
