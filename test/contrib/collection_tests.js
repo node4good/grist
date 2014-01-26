@@ -1,39 +1,37 @@
-var Step = require('step');
+var Promise = require('mpromise');
 
-/**
- * Example of a simple document save with safe set to false
- *
- * @_class collection
- * @_function save
- * @ignore
- */
+
 exports.shouldCorrectlySaveASimpleDocument = function (configuration, test) {
     var db = configuration.newDbInstance({w: 0}, {poolSize: 1});
+    var collection;
+    var def = Promise.deferred();
+    db.open(def.callback);
+    def.promise.then(
+        function () {
+            var deferred = Promise.deferred();
+            db.collection("save_a_simple_document", deferred.callback);
+            return deferred.promise;
+        }
+    ).then(
+        function (coll) {
+            collection = coll;
+            return collection.save({hello: 'world'});
+        }
+    ).then(
+        function () {
+            var deferred2 = Promise.deferred();
+            collection.findOne({hello: 'world'}, deferred2.callback);
+            return deferred2.promise;
+        }
+    ).then(
+        function (doc) {
+            test.equal('world', doc.hello);
+            db.close();
+            test.done();
+        }
+    ).end();
+};
 
-    // DOC_LINE var db = new Db('test', new Server('locahost', 27017));
-    // DOC_START
-    // Establish connection to db
-    db.open(function (err, db) {
-
-        // Fetch the collection
-        var collection = db.collection("save_a_simple_document");
-        // Save a document with no safe option
-        collection.save({hello: 'world'});
-
-        // Wait for a second
-        setTimeout(function () {
-
-            // Find the saved document
-            collection.findOne({hello: 'world'}, function (err, item) {
-                test.equal(null, err);
-                test.equal('world', item.hello);
-                db.close();
-                test.done();
-            });
-        }, 1000);
-    });
-    // DOC_END
-}
 
 /**
  * Example of a simple document save and then resave with safe set to true
@@ -44,44 +42,49 @@ exports.shouldCorrectlySaveASimpleDocument = function (configuration, test) {
  */
 exports.shouldCorrectlySaveASimpleDocumentModifyItAndResaveIt = function (configuration, test) {
     var db = configuration.newDbInstance({w: 0}, {poolSize: 1});
+    var collection;
+    var def = Promise.deferred();
+    db.open(def.callback);
+    def.promise.then(
+        function () {
+            var deferred = Promise.deferred();
+            db.collection("save_a_simple_document", deferred.callback);
+            return deferred.promise;
+        }
+    ).then(
+        function (coll) {
+            collection = coll;
+            return collection.save({hello: 'world'});
+        }
+    ).then(
+        function () {
+            var deferred2 = Promise.deferred();
+            collection.findOne({hello: 'world'}, deferred2.callback);
+            return deferred2.promise;
+        }
+    ).then(
+        function (doc) {
+            test.equal('world', doc.hello);
+            doc['hello2'] = 'world2';
+            return collection.save(doc, {w: 1});
+        }
+    ).then(
+        function () {
+            var def3 = Promise.deferred();
+            collection.findOne({hello: 'world'}, def3.callback);
+            return def3.promise;
+        }
+    ).then(
+        function (item) {
+            test.equal('world', item.hello);
+            test.equal('world2', item.hello2);
 
-    // DOC_LINE var db = new Db('test', new Server('locahost', 27017));
-    // DOC_START
-    // Establish connection to db
-    db.open(function (err, db) {
+            db.close();
+            test.done();
+        }
+    ).end();
+};
 
-        // Fetch the collection
-        var collection = db.collection("save_a_simple_document_modify_it_and_resave_it");
-
-        // Save a document with no safe option
-        collection.save({hello: 'world'}, {w: 0}, function (err, result) {
-
-            // Find the saved document
-            collection.findOne({hello: 'world'}, function (err, item) {
-                test.equal(null, err);
-                test.equal('world', item.hello);
-
-                // Update the document
-                item['hello2'] = 'world2';
-
-                // Save the item with the additional field
-                collection.save(item, {w: 1}, function (err, result) {
-
-                    // Find the changed document
-                    collection.findOne({hello: 'world'}, function (err, item) {
-                        test.equal(null, err);
-                        test.equal('world', item.hello);
-                        test.equal('world2', item.hello2);
-
-                        db.close();
-                        test.done();
-                    });
-                });
-            });
-        });
-    });
-    // DOC_END
-}
 
 /**
  * @ignore
@@ -430,52 +433,6 @@ exports.shouldCorrectlyExecuteIndexExists = function (configuration, test) {
     // DOC_END
 }
 
-/**
- * @ignore
- */
-exports.shouldEnsureStrictAccessCollection = function (configuration, test) {
-    var Collection = configuration.getMongoPackage().Collection;
-    var error_client = configuration.db();
-
-    error_client.collection('does-not-exist', {strict: true}, function (err, collection) {
-        test.ok(err instanceof Error);
-        test.equal("Collection does-not-exist does not exist. Currently in safe mode.", err.message);
-    });
-
-    error_client.createCollection('test_strict_access_collection', function (err, collection) {
-        error_client.collection('test_strict_access_collection', {w: 1}, function (err, collection) {
-            test.ok(collection instanceof Collection);
-            // Let's close the db
-            test.done();
-        });
-    });
-}
-
-/**
- * @ignore
- */
-exports.shouldPerformStrictCreateCollection = function (configuration, test) {
-    var error_client = configuration.db();
-    var Collection = configuration.getMongoPackage().Collection;
-
-    error_client.createCollection('test_strict_create_collection', function (err, collection) {
-        test.ok(collection instanceof Collection);
-
-        // Creating an existing collection should fail
-        error_client.createCollection('test_strict_create_collection', {strict: true}, function (err, collection) {
-            test.ok(err instanceof Error);
-            test.equal("Collection test_strict_create_collection already exists. Currently in safe mode.", err.message);
-
-            // Switch out of strict mode and try to re-create collection
-            error_client.createCollection('test_strict_create_collection', {strict: false}, function (err, collection) {
-                test.ok(collection instanceof Collection);
-
-                // Let's close the db
-                test.done();
-            });
-        });
-    });
-}
 
 /**
  * @ignore
@@ -629,27 +586,8 @@ exports.shouldCorrectlyExecuteSave = function (configuration, test) {
             });
         });
     });
-}
+};
 
-/**
- * @ignore
- */
-/* REASON: Long is not supported
- exports.shouldCorrectlySaveDocumentWithLongValue = function(configuration, test) {
- var Long = configuration.getMongoPackage().Long;
- var client = configuration.db();
-
- client.createCollection('test_save_long', function(err, collection) {
- collection.insert({'x':Long.fromNumber(9223372036854775807)}, {w: 1}, function(err, r) {
- collection.findOne(function(err, doc) {
- test.ok(Long.fromNumber(9223372036854775807).equals(doc.x));
- // Let's close the db
- test.done();
- });
- });
- });
- }
- */
 
 /**
  * @ignore

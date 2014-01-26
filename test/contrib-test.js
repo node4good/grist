@@ -1,5 +1,8 @@
 /*global console,afterEach */
+var _ = require('lodash');
 var tutils = require('./utils');
+var assert = require('assert');
+
 
 var config = function (options) {
     return function () {
@@ -56,9 +59,6 @@ var config = function (options) {
 };
 
 
-var assert = require('assert');
-var _ = require('lodash');
-
 var dir = './contrib';
 var files = [
     'collection_tests',
@@ -103,13 +103,7 @@ describe.none('contrib', function () {
                             return done();
                         }
                         names[name] = true;
-                        var test = {
-                            ok: function (x) { assert.ok(x); },
-                            equal: function (x, y) { assert.equal(y, x); },
-                            deepEqual: function (x, y) { assert.deepEqual(y, x); },
-                            throws: function (x, y) { assert.throws(x, y); },
-                            done: function () { done(); }
-                        };
+                        var test = _.assign({ done: done }, assert);
                         fn(configuration, test);
                     });
                     afterEach(function () {

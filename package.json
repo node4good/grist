@@ -16,7 +16,8 @@
     },
     "dependencies": {
         "lodash": "",
-        "promised-io": "",
+        "safe": "",
+        "async": "",
         "mpromise": "beta",
         "then-fs": ""
     },
@@ -26,9 +27,7 @@
     "devDependencies": {
         "csv": "",
         "temp": "0.4.x",
-        "vows": "",
         "lorem-ipsum": "",
-        "optimist": "",
         "step": "",
         "benchmark": "",
         "mocha": ""
