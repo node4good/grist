@@ -1,47 +1,35 @@
+var os = require('os');
+var fs = require('fs');
+var path = require('path');
 var main = require('../')({});
-var temp = require('temp');
-var _ = require('lodash');
-
-
-var cfg = {};
-module.exports.setConfig = function (cfg_) {
-    _.defaults(cfg_, cfg);
-    cfg = cfg_;
-};
-
-
-module.exports.startDb = module.exports.stopDb = function (cb) { cb(); };
-
 
 var paths = {};
-
-
-module.exports.getDb = function (tag, drop, cb) {
-    if (drop)
-        delete paths[tag];
-    if (!paths[tag]) {
-        paths[tag] = temp.mkdirSync(tag);
-    }
-    var db = new main.Db(paths[tag], {});
-    db.open(cb);
-};
 
 
 module.exports.getDbSync = function (tag, db_options, server_options, drop) {
     if (drop)
         delete paths[tag];
     if (!paths[tag]) {
-        paths[tag] = temp.mkdirSync(tag);
+        var tempName = path.join(os.tmpDir(), tag + '_' + Date.now());
+        fs.mkdirSync(tempName);
+        paths[tag] = tempName;
     }
     return new main.Db(paths[tag], {name: tag});
+};
+
+
+module.exports.getDb = function (tag, drop, cb) {
+    var db = module.exports.getDbSync(tag, null, null, drop);
+    module.exports.openEmpty(db, cb);
 };
 
 
 module.exports.openEmpty = function (db, cb) {
     db.open(function (err) {
         if (err) throw err;
-        cb();
+        cb(null, db);
     });
 };
 
 
+module.exports.startDb = module.exports.stopDb = function (cb) { cb(); };

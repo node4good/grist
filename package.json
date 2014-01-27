@@ -28,7 +28,6 @@
     },
     "devDependencies": {
         "csv": "",
-        "temp": "0.4.x",
         "lorem-ipsum": "",
         "step": "",
         "benchmark": "",

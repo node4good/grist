@@ -198,11 +198,12 @@ describe('Basic', function () {
             }));
         });
 
-        it("find with fields {'sub.num':1}", function (done) {
+        it.only("find with fields {'sub.num':1}", function (done) {
             coll.find({num: 10}, {'sub.num': 1}).toArray(function (err, docs) {
-                if (err) return done(err);
-                assert.equal(_.size(docs[0]), 2);
-                assert.equal(docs[0].sub.num, 10);
+                if (err) throw err;
+                var doc = docs[0];
+                assert.equal(_.size(doc), 2);
+                assert.equal(doc.sub.num, 10);
                 done();
             });
         });
