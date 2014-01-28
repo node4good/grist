@@ -14,46 +14,47 @@ var _id = null;
 
 
 describe('Basic', function () {
-    describe('New store', function () {
-        before(function (done) {
-            var test = this;
-            tutils.getDb('test', true, function (err, _db) {
-                test._db = _db;
-                test._db.collection("test", {}, function (err, _coll) {
-                    test.coll = _coll;
-                    var p = new Promise;
-                    p.fulfill();
-                    gt0sin = 0;
-                    _dt = null;
-                    _.times(num, function (i) {
-                        var d;
-                        if (!_dt) _dt = d = new Date();
-                        else d = new Date(_dt.getTime() + 1000 * i);
-                        var obj = {
-                            _dt: d,
-                            dum: parseInt(i / 2),
-                            num: i,
-                            pum: i,
-                            sub: {num: i},
-                            sin: Math.sin(i),
-                            cos: Math.cos(i),
-                            t: 15,
-                            junk: loremIpsum({count: 1, units: "paragraphs"})
-                        };
-                        obj.txt = obj.sin > 0 && "greater than zero" || obj.sin < 0 && "less than zero" || "zero";
-                        if (obj.sin > 0 && obj.sin < 0.5)
-                            gt0sin++;
-                        p = p.then(function () {
-                            return test.coll.insert(obj);
-                        });
+    before(function (done) {
+        var test = this;
+        tutils.getDb('test', true, function (err, _db) {
+            test._db = _db;
+            test._db.collection("test", {}, function (err, _coll) {
+                test.coll = _coll;
+                var p = new Promise;
+                p.fulfill();
+                gt0sin = 0;
+                _dt = null;
+                _.times(num, function (i) {
+                    var d;
+                    if (!_dt) _dt = d = new Date();
+                    else d = new Date(_dt.getTime() + 1000 * i);
+                    var obj = {
+                        _dt: d,
+                        dum: parseInt(i / 2),
+                        num: i,
+                        pum: i,
+                        sub: {num: i},
+                        sin: Math.sin(i),
+                        cos: Math.cos(i),
+                        t: 15,
+                        junk: loremIpsum({count: 1, units: "paragraphs"})
+                    };
+                    obj.txt = obj.sin > 0 && "greater than zero" || obj.sin < 0 && "less than zero" || "zero";
+                    if (obj.sin > 0 && obj.sin < 0.5)
+                        gt0sin++;
+                    p = p.then(function () {
+                        return test.coll.insert(obj);
                     });
-                    p.then(function () {
-                        done();
-                    }).end();
                 });
+                p.then(function () {
+                    done();
+                }).end();
             });
         });
+    });
 
+
+    describe('New store', function () {
         it("Has right size", function (done) {
             this.coll.count(function (err, count) {
                 assert.equal(count, num);
@@ -66,7 +67,6 @@ describe('Basic', function () {
             delete this.coll;
             delete this._db;
         });
-
     });
 
 
@@ -198,7 +198,7 @@ describe('Basic', function () {
             }));
         });
 
-        it.only("find with fields {'sub.num':1}", function (done) {
+        it("find with fields {'sub.num':1}", function (done) {
             coll.find({num: 10}, {'sub.num': 1}).toArray(function (err, docs) {
                 if (err) throw err;
                 var doc = docs[0];
