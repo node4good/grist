@@ -88,13 +88,14 @@ describe('Basic', function () {
             });
         });
         it("utf8 text", function (done) {
-            coll.find({ sin: { $gt: 0 } }).toArray(safe.sure(done, function (docs) {
+            coll.find({ sin: { $gt: 0 } }).toArray(function (err, docs) {
+                if (err) throw err;
                 assert(!_.isEmpty(docs));
                 docs.forEach(function (doc) {
                     assert.equal(doc.txt, "greater than zero");
                 });
                 done();
-            }));
+            });
         });
         it("find $eq", function (done) {
             coll.find({num: 10}).toArray(safe.sure(done, function (docs) {
