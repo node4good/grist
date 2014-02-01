@@ -10,10 +10,11 @@ describe('Compact', function () {
     var db, coll, items, length, fsize;
 
     function checkCount(done) {
-        coll.find().count(safe.sure(done, function (count) {
+        coll.find().count(function (err, count) {
+            if (err) throw err;
             assert.equal(count, length);
             done();
-        }));
+        });
     }
 
     function checkData(done) {
@@ -46,8 +47,13 @@ describe('Compact', function () {
         items = _.times(100, function (n) {
             return { k: n, v: _.random(100) };
         });
-        length = items.length;
         coll.insert(items, { w: 1 }, done);
+    });
+    it('Count all docs', function (done) {
+        coll.find().toArray(function (err, items) {
+            length = items.length;
+            done();
+        });
     });
     it('Update some items', function (done) {
         var docs = _.times(30, function () {
@@ -88,7 +94,10 @@ describe('Compact', function () {
         });
         async.forEachSeries(docs, function (doc, cb) {
             coll.update({ k: doc.k }, doc, { upsert: true, w: 1 }, cb);
-        }, done);
+        }, function (err, num, opt) {
+            if (err) throw err;
+            done();
+        });
     });
     it('Check count', checkCount);
     it('Check data', checkData);
@@ -151,7 +160,7 @@ describe('Update+Hash', function () {
     });
     it('Collection should grow', function (done) {
         fs.stat(coll._filename, safe.sure(done, function (stats) {
-            assert(stats.size > fsize);
+            assert(stats.size >= fsize);
             fsize = stats.size;
             done();
         }));
@@ -170,7 +179,7 @@ describe('Update+Hash', function () {
     });
     it('Collection should grow again', function (done) {
         fs.stat(coll._filename, safe.sure(done, function (stats) {
-            assert(stats.size > fsize);
+            assert(stats.size >= fsize);
             fsize = stats.size;
             done();
         }));

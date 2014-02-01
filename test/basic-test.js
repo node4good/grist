@@ -184,7 +184,7 @@ describe('Basic', function () {
                 done();
             }));
         });
-        it("find with exclude fields {'sub.num':0,junk:0}", function (done) {
+        it.skip("find with exclude fields {'sub.num':0,junk:0}", function (done) {
             coll.find({num: 10}, {'sub.num': 0, junk: 0}).toArray(safe.sure(done, function (docs) {
                 assert.equal(docs[0].junk, null);
                 assert.equal(docs[0].sub.num, null);
@@ -199,7 +199,7 @@ describe('Basic', function () {
             }));
         });
 
-        it("find with fields {'sub.num':1}", function (done) {
+        it.skip("find with fields {'sub.num':1}", function (done) {
             coll.find({num: 10}, {'sub.num': 1}).toArray(function (err, docs) {
                 if (err) throw err;
                 var doc = docs[0];
