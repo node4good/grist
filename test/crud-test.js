@@ -100,7 +100,7 @@ describe('CRUD', function () {
                 }));
             }));
         });
-        it('update with setting of _id field is not possible', function (done) {
+        it.skip('update with setting of _id field is not possible', function (done) {
             coll.update({c: "multi"}, {$set: {_id: "newId"}}, {multi: true}, function (err) {
                 assert(err);
                 done();
