@@ -1,3 +1,5 @@
+'use strict';
+/*global describe */
 var assert = require('assert');
 var _ = require('lodash');
 var safe = require('safe');
@@ -25,7 +27,7 @@ describe.skip('Misc', function () {
     it('GH-19 Unset must clean key from object', function (done) {
         db.collection("GH19", {}, safe.sure(done, function (_coll) {
             _coll.insert({name: 'Tony', age: '37'}, safe.sure(done, function () {
-                _coll.findAndModify({}, {age: 1}, {$set: {name: 'Tony'}, $unset: { age: true }}, {new: true}, safe.sure(done, function (doc) {
+                _coll.findAndModify({}, {age: 1}, {$set: {name: 'Tony'}, $unset: { age: true }}, {'new': true}, safe.sure(done, function (doc) {
                     assert(!_.contains(_.keys(doc), 'age'));
                     _coll.findOne({}, {age: 1}, safe.sure(done, function (obj) {
                         assert(!_.contains(_.keys(obj), 'age'));

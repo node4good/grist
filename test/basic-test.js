@@ -1,4 +1,5 @@
 "use strict";
+/*global it */
 var assert = require('assert');
 var _ = require('lodash');
 var safe = require('safe');
