@@ -5,7 +5,7 @@ var _ = require('lodash');
 var safe = require('safe');
 var tutils = require("./utils");
 
-describe.skip('Misc', function () {
+describe('Misc', function () {
     var db;
     before(function (done) {
         tutils.getDb('misc', true, safe.sure(done, function (_db) {
@@ -20,19 +20,6 @@ describe.skip('Misc', function () {
                 cursor.count(safe.sure(done, function (res) {
                     assert.equal(res, 1);
                     cursor.toArray(done);
-                }));
-            }));
-        }));
-    });
-    it('GH-19 Unset must clean key from object', function (done) {
-        db.collection("GH19", {}, safe.sure(done, function (_coll) {
-            _coll.insert({name: 'Tony', age: '37'}, safe.sure(done, function () {
-                _coll.findAndModify({}, {age: 1}, {$set: {name: 'Tony'}, $unset: { age: true }}, {'new': true}, safe.sure(done, function (doc) {
-                    assert(!_.contains(_.keys(doc), 'age'));
-                    _coll.findOne({}, {age: 1}, safe.sure(done, function (obj) {
-                        assert(!_.contains(_.keys(obj), 'age'));
-                        done();
-                    }));
                 }));
             }));
         }));
@@ -64,13 +51,6 @@ describe.skip('Misc', function () {
                         }));
                     }));
                 }));
-            }));
-        }));
-    });
-    it('GH-26 sort order can also be optional for findAndRemove', function (done) {
-        db.collection("GH26", {}, safe.sure(done, function (_coll) {
-            _coll.insert({}, safe.sure(done, function () {
-                _coll.findAndRemove({}, done);
             }));
         }));
     });
