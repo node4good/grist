@@ -1,37 +1,37 @@
 {
-    "author": "Refael Ackermann<refael@empeeric.com>",
-    "name": "puny",
-    "version": "0.0.0",
-    "description": "Embedded Node.js document store upward compatible with MongoDB",
-    "keywords": [
-        "database",
-        "datastore",
-        "embedded",
-        "mongodb",
-        "yaml"
-    ],
-    "main": "./lib/index",
-    "engines": {
-        "node": ">= 0.11.x"
-    },
-    "dependencies": {
-        "lodash": "",
-        "safe": "",
-        "async": "",
-        "mpromise": "beta",
-        "then-fs": "",
-        "sift": "",
-        "git-node": "",
-        "mquery": ""
-    },
-    "scripts": {
-        "test": "mocha"
-    },
-    "devDependencies": {
-        "csv": "",
-        "lorem-ipsum": "",
-        "step": "",
-        "benchmark": "",
-        "mocha": ""
-    }
+  "author": "Refael Ackermann<refael@empeeric.com>",
+  "name": "puny",
+  "version": "1.0.0",
+  "description": "Embedded Node.js document store upward compatible with MongoDB",
+  "keywords": [
+    "database",
+    "datastore",
+    "embedded",
+    "mongodb",
+    "yaml"
+  ],
+  "main": "./lib/index",
+  "engines": {
+    "node": ">= 0.11.x"
+  },
+  "dependencies": {
+    "lodash": "",
+    "safe": "",
+    "async": "",
+    "mpromise": "beta",
+    "then-fs": "",
+    "sift": "",
+    "git-node": "",
+    "mquery": ""
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "csv": "",
+    "lorem-ipsum": "",
+    "step": "",
+    "benchmark": "",
+    "mocha": ""
+  }
 }
