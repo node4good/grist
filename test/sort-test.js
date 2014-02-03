@@ -1,5 +1,5 @@
 'use strict';
-/*global console */
+/*global describe */
 var _ = require('lodash');
 var assert = require('assert');
 var safe = require('safe');
@@ -83,8 +83,6 @@ describe('Sort Test', function () {
                             prev_value = doc.nul;
                         }
                     } else {
-                        if (prev_value > doc.nul)
-                            console.log(prev_value, doc.nul);
                         assert(prev_value <= doc.nul);
                         prev_value = doc.nul;
                     }
