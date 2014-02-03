@@ -1,6 +1,7 @@
+'use strict';
+/*global it */
 var assert = require('assert');
 var _ = require('lodash');
-var async = require('async');
 var safe = require('safe');
 var tutils = require("./utils");
 
@@ -81,7 +82,6 @@ describe('CRUD', function () {
                 coll.findOne({i: 3}, safe.sure(done, function (obj1) {
                     assert.deepEqual(obj, clone);
                     clone._id = obj1._id;
-                    delete obj1.pos;
                     assert.deepEqual(obj1, clone);
                     done();
                 }));

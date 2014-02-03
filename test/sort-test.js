@@ -1,6 +1,7 @@
-var assert = require('assert');
+'use strict';
+/*global console */
 var _ = require('lodash');
-var async = require('async');
+var assert = require('assert');
 var safe = require('safe');
 var tutils = require("./utils");
 
@@ -38,16 +39,16 @@ describe('Sort Test', function () {
         it("Populated with test data", function (done) {
             this.timeout(10000);
             //var nums = [ 4, 8, 3, 2, 7, 78, 3, 7, 32, 67, 3, 6, 2, 67, 8, 3, 7, 3, 7, 3, 67, 7, 8, 3, 1, 8, 9 ];
-            var nums = _.times(10000, function (n) {
+            var nums = _.times(10000, function () {
                 return _.random(100);
             });
             var docs = nums.map(function (num) {
                 var doc = { num: num, num2: 100 - num, val: num, nul: num, inul: num };
-                if (num % 33 == 0) {
+                if (num % 33 === 0) {
                     delete doc.nul;
                     delete doc.inul;
                 }
-                if (num % 21 == 0) {
+                if (num % 21 === 0) {
                     doc.nul = doc.inul = null;
                 }
                 return doc;
@@ -60,9 +61,7 @@ describe('Sort Test', function () {
                 return x.num > 25;
             });
             gtr = gt.slice().reverse();
-            async.forEachSeries(docs, function (doc, cb) {
-                coll.insert(doc, cb);
-            }, done);
+            coll.insert(docs, done);
         });
         it("Sort asc index", function (done) {
             coll.find().sort({ num: 1 }).toArray(safe.sure(done, function (docs) {
@@ -84,10 +83,12 @@ describe('Sort Test', function () {
                             prev_value = doc.nul;
                         }
                     } else {
-                        assert(prev_value <= doc.nul)
+                        if (prev_value > doc.nul)
+                            console.log(prev_value, doc.nul);
+                        assert(prev_value <= doc.nul);
                         prev_value = doc.nul;
                     }
-                })
+                });
                 done();
             }));
         });
@@ -105,10 +106,10 @@ describe('Sort Test', function () {
                             prev_value = doc.inul;
                         }
                     } else {
-                        assert(prev_value <= doc.inul)
+                        assert(prev_value <= doc.inul);
                         prev_value = doc.inul;
                     }
-                })
+                });
                 done();
             }));
         });

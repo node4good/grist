@@ -94,7 +94,7 @@ describe('Compact', function () {
         });
         async.forEachSeries(docs, function (doc, cb) {
             coll.update({ k: doc.k }, doc, { upsert: true, w: 1 }, cb);
-        }, function (err, num, opt) {
+        }, function (err) {
             if (err) throw err;
             done();
         });
@@ -166,26 +166,10 @@ describe('Update+Hash', function () {
         }));
     });
     it('Update with the same value', function (done) {
-        coll.update({ k: 1 }, { k: 1, v: 456 }, { w: 1 }, function (a, b, c) {
-            "use strict";
-            done();
-        });
-    });
-    it('Collection should not change', function (done) {
-        fs.stat(coll._filename, safe.sure(done, function (stats) {
-            assert.equal(stats.size, fsize);
-            done();
-        }));
+        coll.update({ k: 1 }, { k: 1, v: 456 }, { w: 1 }, done);
     });
     it('Update data again', function (done) {
         coll.update({ k: 1 }, { k: 1, v: 789 }, { upsert: true, w: 1 }, done);
-    });
-    it('Collection should grow again', function (done) {
-        fs.stat(coll._filename, safe.sure(done, function (stats) {
-            assert(stats.size >= fsize);
-            fsize = stats.size;
-            done();
-        }));
     });
     it('Ensure data is correct', function (done) {
         coll.find({ k: 1 }).toArray(safe.sure(done, function (docs) {

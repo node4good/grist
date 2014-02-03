@@ -24,9 +24,9 @@ function load(file, iterator, callback) {
             });
             queue.push({ value: value, index: index });
         }
-    }).on('end', function (rowcount) {
-            queue.push({});
-        });
+    }).on('end', function () {
+        queue.push({});
+    });
 }
 
 var rowcount = 500;
@@ -48,9 +48,14 @@ describe('Import', function () {
             }));
         });
         it("Populated with test data", function (done) {
+            var docs = [];
             load(sample, function (value, index, callback) {
-                coll.insert(value, callback);
-            }, done);
+                    docs.push(value);
+                    callback();
+                }, function () {
+                    coll.insert(docs, done);
+                }
+            );
         });
         it("Has right size", function (done) {
             coll.count(safe.sure(done, function (count) {
