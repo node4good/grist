@@ -1,0 +1,9 @@
+{"k":"0000000078","o":"0000000102","v":"001"}
+{"_id":2,"_uid":2,"_dt":1390472125923,"_s":"d0dbd30f76e7814a4eb865219d600968"}
+{"_id":{"$wrap":"$oid","v":2},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[3,3],"__v":0}
+{"k":"0000000078","o":"0000000250","v":"001"}
+{"_id":3,"_uid":5,"_dt":1390472125936,"_s":"aaafc09f0766517c8d0551b52d834e67"}
+{"title":"hocus pocus","_id":{"$wrap":"$oid","v":3},"nested":{"array":[]},"comments":[{"title":"Humpty Dumpty","comments":[{"title":"nested","comments":[],"_id":{"$wrap":"$oid","v":4}}],"_id":{"$wrap":"$oid","v":5}}],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000079","o":"0000000691","v":"001"}
+{"_id":6,"_uid":10,"_dt":1390472125947,"_s":"b4232a56f909535c6703f77831fb9853"}
+{"title":"Test","slug":"test","date":{"$wrap":"$date","v":1390472125942,"h":"2014-01-23T10:15:25.942Z"},"published":true,"mixed":{"x":[{"y":[1,"yes",2]}]},"_id":{"$wrap":"$oid","v":6},"nested":{"array":[]},"comments":[{"title":"Test","date":{"$wrap":"$date","v":1390472125942,"h":"2014-01-23T10:15:25.942Z"},"body":"Test","comments":[],"_id":{"$wrap":"$oid","v":7}},{"title":"Super","date":{"$wrap":"$date","v":1390472125942,"h":"2014-01-23T10:15:25.942Z"},"body":"Cool","comments":[],"_id":{"$wrap":"$oid","v":8}}],"owners":[{"$wrap":"$oid","v":9},{"$wrap":"$oid","v":10}],"numbers":[],"meta":{"date":{"$wrap":"$date","v":1390472125942,"h":"2014-01-23T10:15:25.942Z"},"visitors":5},"__v":0}

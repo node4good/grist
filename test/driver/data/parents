@@ -1,0 +1,6 @@
+{"k":"0000000078","o":"0000000127","v":"001"}
+{"_id":2,"_uid":3,"_dt":1390471919645,"_s":"767754329c55b748658ec40666e8c343"}
+{"_id":{"$wrap":"$oid","v":2},"embeds":[{"title":"Testing post hooks for embedded docs","_id":{"$wrap":"$oid","v":3}}],"__v":0}
+{"k":"0000000078","o":"0000000127","v":"001"}
+{"_id":4,"_uid":5,"_dt":1390472126886,"_s":"21c5d7ae3169937cdeb2882764f8cc5f"}
+{"_id":{"$wrap":"$oid","v":4},"embeds":[{"title":"Testing post hooks for embedded docs","_id":{"$wrap":"$oid","v":5}}],"__v":0}

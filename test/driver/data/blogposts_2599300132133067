@@ -1,0 +1,171 @@
+{"k":"0000000078","o":"0000000112","v":"001"}
+{"_id":2,"_uid":2,"_dt":1390471919205,"_s":"9238c49e4207b4fe10fc429cb7fdeb3b"}
+{"title":null,"_id":{"$wrap":"$oid","v":2},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000078","o":"0000000099","v":"001"}
+{"_id":3,"_uid":3,"_dt":1390471919209,"_s":"799144d7e04d8781b9c02ff5f40365d7"}
+{"_id":{"$wrap":"$oid","v":3},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000078","o":"0000000196","v":"001"}
+{"_id":4,"_uid":4,"_dt":1390471919224,"_s":"299961cda3986ef9caa2ed93676900ab"}
+{"_id":{"$wrap":"$oid","v":4},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"meta":{"date":{"$wrap":"$date","v":1390471919223,"h":"2014-01-23T10:11:59.223Z"},"visitors":10},"__v":0}
+{"k":"0000000078","o":"0000000196","v":"001"}
+{"_id":4,"_uid":4,"_dt":1390471919225,"_s":"fe644193b93352078963b035b597361a"}
+{"_id":{"$wrap":"$oid","v":4},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"meta":{"date":{"$wrap":"$date","v":1390471919223,"h":"2014-01-23T10:11:59.223Z"},"visitors":20},"__v":0}
+{"k":"0000000078","o":"0000000121","v":"001"}
+{"_id":5,"_uid":5,"_dt":1390471919228,"_s":"7703fab280adbb7c8556a6b6ffe5615d"}
+{"_id":{"$wrap":"$oid","v":5},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"meta":{"visitors":5},"__v":0}
+{"k":"0000000078","o":"0000000121","v":"001"}
+{"_id":5,"_uid":5,"_dt":1390471919232,"_s":"2a38cdecb567cef572c60727ac053917"}
+{"_id":{"$wrap":"$oid","v":5},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"meta":{"visitors":3},"__v":0}
+{"k":"0000000078","o":"0000000068","v":"001"}
+{"_id":6,"_uid":6,"_dt":1390471919236,"_s":"1385efcbd344a409985889cca9ef691e"}
+{"_id":{"$wrap":"$oid","v":6},"nested":{"nums":[1,2,3,4,5]},"__v":0}
+{"k":"0000000078","o":"0000000068","v":"001"}
+{"_id":7,"_uid":7,"_dt":1390471919240,"_s":"e0699ca880385b23a4f26e1d23698d27"}
+{"_id":{"$wrap":"$oid","v":7},"nested":{"nums":[1,2,3,4,5]},"__v":0}
+{"k":"0000000078","o":"0000000158","v":"001"}
+{"_id":8,"_uid":9,"_dt":1390471919248,"_s":"62a0acc5ee7ebdfdadcfacf2dee31bd7"}
+{"_id":{"$wrap":"$oid","v":8},"nested":{"array":[]},"comments":[{"title":"woot","comments":[],"_id":{"$wrap":"$oid","v":9}}],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000078","o":"0000000161","v":"001"}
+{"_id":8,"_uid":9,"_dt":1390471919253,"_s":"4eb0c31a3331df4e4035a9b353e7fef1"}
+{"_id":{"$wrap":"$oid","v":8},"nested":{"array":[]},"comments":[{"title":"notwoot","comments":[],"_id":{"$wrap":"$oid","v":9}}],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000160","v":"001"}
+{"_id":10,"_uid":11,"_dt":1390471919264,"_s":"bb7b7fd1083f840f8a04f80d15bc7f2e"}
+{"_id":{"$wrap":"$oid","v":10},"nested":{"array":[]},"comments":[{"title":"woot","comments":[],"_id":{"$wrap":"$oid","v":11}}],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000115","v":"001"}
+{"_id":12,"_uid":12,"_dt":1390471919272,"_s":"be430c64b29f3cb2253dc490fcfadc00"}
+{"title":"woot","_id":{"$wrap":"$oid","v":12},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000159","v":"001"}
+{"_id":13,"_uid":14,"_dt":1390471919284,"_s":"4917c5a368fb8307bb49d107c1323efc"}
+{"_id":{"$wrap":"$oid","v":13},"nested":{"array":[]},"comments":[{"title":"one","comments":[],"_id":{"$wrap":"$oid","v":14}}],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000159","v":"001"}
+{"_id":13,"_uid":14,"_dt":1390471919286,"_s":"23ae5d60fd31bd4ebd7b1be335534590"}
+{"_id":{"$wrap":"$oid","v":13},"nested":{"array":[]},"comments":[{"title":"two","comments":[],"_id":{"$wrap":"$oid","v":14}}],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000100","v":"001"}
+{"_id":15,"_uid":15,"_dt":1390471919318,"_s":"106c037c72f605659740bcd645abb6ae"}
+{"_id":{"$wrap":"$oid","v":15},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000253","v":"001"}
+{"_id":16,"_uid":18,"_dt":1390471919328,"_s":"191ffdedfc1658d2670a1d832757fc6b"}
+{"title":"hocus pocus","_id":{"$wrap":"$oid","v":16},"nested":{"array":[]},"comments":[{"title":"Humpty Dumpty","comments":[{"title":"nested","comments":[],"_id":{"$wrap":"$oid","v":17}}],"_id":{"$wrap":"$oid","v":18}}],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000112","v":"001"}
+{"_id":19,"_uid":19,"_dt":1390471919338,"_s":"ecc79f6863ec1ec39e705916104b7201"}
+{"title":"1","_id":{"$wrap":"$oid","v":19},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000112","v":"001"}
+{"_id":19,"_uid":19,"_dt":1390471919339,"_s":"daefb8287388d3cfb1ab56408f0a206b"}
+{"title":"2","_id":{"$wrap":"$oid","v":19},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000105","v":"001"}
+{"_id":20,"_uid":20,"_dt":1390471919342,"_s":"72f6a525e1ce224a1161d0f21597c836"}
+{"_id":{"$wrap":"$oid","v":20},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[1,2,3],"__v":0}
+{"k":"0000000080","o":"0000000051","v":"001"}
+{"_id":21,"_uid":21,"_dt":1390471919535,"_s":"2ca26520278c16bb1bb992ad35589126"}
+{"_id":{"$wrap":"$oid","v":21},"name":null,"__v":0}
+{"k":"0000000080","o":"0000000149","v":"001"}
+{"_id":22,"_uid":22,"_dt":1390471919550,"_s":"971e6a99cb859cd9c27737be29c6df01"}
+{"author":"Mark Twain","title":"Huckleberry Finn","_id":{"$wrap":"$oid","v":22},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000068","v":"001"}
+{"_id":23,"_uid":23,"_dt":1390471919567,"_s":"e66874c18901b1cd0075c58f26ea6d7f"}
+{"_id":{"$wrap":"$oid","v":23},"nest":{"st":"jsconf rules"},"__v":0}
+{"k":"0000000080","o":"0000000068","v":"001"}
+{"_id":24,"_uid":24,"_dt":1390471919568,"_s":"932ad9152046ebc0b4863410aa755673"}
+{"_id":{"$wrap":"$oid","v":24},"nest":{"st":"jsconf rules"},"__v":0}
+{"k":"0000000080","o":"0000000039","v":"001"}
+{"_id":25,"_uid":25,"_dt":1390471919569,"_s":"2a0abd6446ae773dcfc64edba2314ecb"}
+{"_id":{"$wrap":"$oid","v":25},"__v":0}
+{"k":"0000000080","o":"0000000084","v":"001"}
+{"_id":25,"_uid":25,"_dt":1390471919572,"_s":"06edc2c051ec65249b220ff4c1e99b97"}
+{"_id":{"$wrap":"$oid","v":25},"__v":0,"nest":{"st":"jsconf rules","yep":"it does"}}
+{"k":"0000000080","o":"0000000051","v":"001"}
+{"_id":25,"_uid":25,"_dt":1390471919574,"_s":"3990f48bd457d1fb5a0f8b6ce1363f5e"}
+{"_id":{"$wrap":"$oid","v":25},"__v":0,"nest":null}
+{"k":"0000000080","o":"0000000187","v":"001"}
+{"_id":26,"_uid":27,"_dt":1390471919582,"_s":"933f3f64d7dcb6f83446244bfc41f3f4"}
+{"_id":{"$wrap":"$oid","v":26},"nested":{"array":[]},"comments":[{"title":"first-title","body":"first-body","comments":[],"_id":{"$wrap":"$oid","v":27}}],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000188","v":"001"}
+{"_id":26,"_uid":27,"_dt":1390471919585,"_s":"416928b4686522c51248586e5c7fb84e"}
+{"_id":{"$wrap":"$oid","v":26},"nested":{"array":[]},"comments":[{"title":"second-title","body":"first-body","comments":[],"_id":{"$wrap":"$oid","v":27}}],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000189","v":"001"}
+{"_id":26,"_uid":27,"_dt":1390471919589,"_s":"35dd4b860a4e6db90b207e299e21837f"}
+{"_id":{"$wrap":"$oid","v":26},"nested":{"array":[]},"comments":[{"title":"second-title","body":"second-body","comments":[],"_id":{"$wrap":"$oid","v":27}}],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000169","v":"001"}
+{"_id":28,"_uid":29,"_dt":1390471919592,"_s":"181169d48c665c43aad23adde4bc4d66"}
+{"_id":{"$wrap":"$oid","v":28},"nested":{"array":[]},"comments":[{"title":"before-change","comments":[],"_id":{"$wrap":"$oid","v":29}}],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000168","v":"001"}
+{"_id":28,"_uid":29,"_dt":1390471919595,"_s":"c34c86d21520b5f6a158bdb275a2972e"}
+{"_id":{"$wrap":"$oid","v":28},"nested":{"array":[]},"comments":[{"title":"after-change","comments":[],"_id":{"$wrap":"$oid","v":29}}],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000221","v":"001"}
+{"_id":30,"_uid":32,"_dt":1390471919600,"_s":"b4b01e7f6ab46dccfdd11e65436db7c2"}
+{"_id":{"$wrap":"$oid","v":30},"nested":{"array":[]},"comments":[{"title":"woot","comments":[],"_id":{"$wrap":"$oid","v":31}},{"title":"aaaa","comments":[],"_id":{"$wrap":"$oid","v":32}}],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000100","v":"001"}
+{"_id":33,"_uid":33,"_dt":1390471919603,"_s":"5213b98ac9071c858b007b526d855b49"}
+{"_id":{"$wrap":"$oid","v":33},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000100","v":"001"}
+{"_id":34,"_uid":34,"_dt":1390471919606,"_s":"c3b11ad337f385c9be510219e5e2284a"}
+{"_id":{"$wrap":"$oid","v":34},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000053","v":"001"}
+{"_id":35,"_uid":35,"_dt":1390471919615,"_s":"e7e072b3e5350681dbb6f03a40179eb3"}
+{"name":"zupa","_id":{"$wrap":"$oid","v":35},"__v":0}
+{"k":"0000000080","o":"0000000141","v":"001"}
+{"_id":36,"_uid":36,"_dt":1390471919648,"_s":"0119c693da74c99237f30bade94bee3c"}
+{"title":"interoperable count as promise","_id":{"$wrap":"$oid","v":36},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000142","v":"001"}
+{"_id":37,"_uid":37,"_dt":1390471919652,"_s":"65cd92a1e11088a3cbe2626cb7da88af"}
+{"title":"interoperable update as promise","_id":{"$wrap":"$oid","v":37},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000148","v":"001"}
+{"_id":37,"_uid":37,"_dt":1390471919655,"_s":"5ae6fe3f7433b5d838d2bed7c370c0f8"}
+{"title":"interoperable update as promise delta","_id":{"$wrap":"$oid","v":37},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000143","v":"001"}
+{"_id":38,"_uid":38,"_dt":1390471919658,"_s":"5382998a253b5843be1d0589fc8dd847"}
+{"title":"interoperable findOne as promise","_id":{"$wrap":"$oid","v":38},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000140","v":"001"}
+{"_id":39,"_uid":39,"_dt":1390471919662,"_s":"e74234742a98f835e7a3f528d4f96eb8"}
+{"title":"interoperable find as promise","_id":{"$wrap":"$oid","v":39},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000140","v":"001"}
+{"_id":40,"_uid":40,"_dt":1390471919663,"_s":"ade70dfdee8f9e880735d891348278db"}
+{"title":"interoperable find as promise","_id":{"$wrap":"$oid","v":40},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000142","v":"001"}
+{"_id":41,"_uid":41,"_dt":1390471919666,"_s":"3568fdcdba9a68edc1808d5f894db09d"}
+{"title":"interoperable remove as promise","_id":{"$wrap":"$oid","v":41},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000051","o":"0000000000","v":"001"}
+{"_id":41,"_uid":41,"_dt":1390471919668,"_a":"del"}
+
+{"k":"0000000080","o":"0000000136","v":"001"}
+{"_id":42,"_uid":42,"_dt":1390471919673,"_s":"543b5f8285b7b159af020a36595d5048"}
+{"title":"interop ad-hoc as promise","_id":{"$wrap":"$oid","v":42},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000143","v":"001"}
+{"_id":43,"_uid":43,"_dt":1390471919677,"_s":"777405ba5809376add725fb9a71c9662"}
+{"title":"interoperable count as promise 2","_id":{"$wrap":"$oid","v":43},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000144","v":"001"}
+{"_id":44,"_uid":44,"_dt":1390471919680,"_s":"36d1a7546be1e94d111fc46d32d5d64b"}
+{"title":"interoperable update as promise 2","_id":{"$wrap":"$oid","v":44},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000150","v":"001"}
+{"_id":44,"_uid":44,"_dt":1390471919682,"_s":"231822fd6ada018fc379339319365bd2"}
+{"title":"interoperable update as promise delta 2","_id":{"$wrap":"$oid","v":44},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000145","v":"001"}
+{"_id":45,"_uid":45,"_dt":1390471919686,"_s":"05b7a13e2887f1a515401c8454d3abd9"}
+{"title":"interoperable findOne as promise 2","_id":{"$wrap":"$oid","v":45},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000142","v":"001"}
+{"_id":46,"_uid":46,"_dt":1390471919691,"_s":"b6e862c1fcdf3da97786218d0b3f1798"}
+{"title":"interoperable find as promise 2","_id":{"$wrap":"$oid","v":46},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000142","v":"001"}
+{"_id":47,"_uid":47,"_dt":1390471919691,"_s":"236a8a2717eacc5ee1aceec58dcfae9c"}
+{"title":"interoperable find as promise 2","_id":{"$wrap":"$oid","v":47},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000144","v":"001"}
+{"_id":48,"_uid":48,"_dt":1390471919695,"_s":"1db4849296a15756f3166375c4d2c54a"}
+{"title":"interoperable remove as promise 2","_id":{"$wrap":"$oid","v":48},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000051","o":"0000000000","v":"001"}
+{"_id":48,"_uid":48,"_dt":1390471919698,"_a":"del"}
+
+{"k":"0000000080","o":"0000000144","v":"001"}
+{"_id":49,"_uid":49,"_dt":1390471919701,"_s":"05e6f47b8ae5b870a9696e3c7cb53d27"}
+{"title":"interoperable ad-hoc as promise 2","_id":{"$wrap":"$oid","v":49},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000119","v":"001"}
+{"_id":50,"_uid":50,"_dt":1390471919711,"_s":"554d26946361a96359717c469dfacd1a"}
+{"mixed":{"rgx":{}},"_id":{"$wrap":"$oid","v":50},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000116","v":"001"}
+{"_id":51,"_uid":51,"_dt":1390471919717,"_s":"d0898e81bbd2a810d87fb22e873ab91c"}
+{"title":"first","_id":{"$wrap":"$oid","v":51},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000118","v":"001"}
+{"_id":51,"_uid":51,"_dt":1390471919718,"_s":"036a37c83e5f15c33db278760cf3c08e"}
+{"title":"changed","_id":{"$wrap":"$oid","v":51},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
+{"k":"0000000080","o":"0000000100","v":"001"}
+{"_id":52,"_uid":52,"_dt":1390471919726,"_s":"ce56d552cf2d000713f0d2ba4887e3c7"}
+{"_id":{"$wrap":"$oid","v":52},"nested":{"array":[]},"comments":[],"owners":[],"numbers":[],"__v":0}
