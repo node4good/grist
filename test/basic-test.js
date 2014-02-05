@@ -288,8 +288,9 @@ describe('C.R.U.D.', function () {
             obj = {i: 1, j: 1};
             coll.save(obj, done);
         });
-        it('id is assigned', function () {
+        it('id is assigned', function (done) {
             assert(obj._id);
+            done();
         });
         it('modify it', function (done) {
             obj.i++;

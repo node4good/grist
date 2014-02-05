@@ -86,7 +86,7 @@ describe('Incremental update', function () {
             }));
         });
     });
-    describe("$setOnInsert", function () {
+    describe.skip("$setOnInsert", function () {
         it("#1 $setOnInsert on update", function (done) {
             db.collection("setOnInsert", {}, safe.sure(done, function (_coll) {
                 _coll.update({_id: 1}, {$setOnInsert: {name: "John", sub: {gender: "male"}}}, {upsert: true}, safe.sure(done, function () {

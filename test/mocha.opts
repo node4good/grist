@@ -1,1 +1,4 @@
 -R spec
+--bail
+-A
+
