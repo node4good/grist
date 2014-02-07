@@ -351,7 +351,7 @@ describe('Search Array', function () {
 });
 
 
-describe.skip('Search', function () {
+describe('Search', function () {
     this.timeout(60 * 60 * 1000);
     describe('New store', function () {
         var db, collection;
@@ -359,7 +359,7 @@ describe.skip('Search', function () {
             tutils.getDb('test', true, function (err, _db) {
                 if (err) return done(err);
                 db = _db;
-                db.collection("test1", {}, function (err, _coll) {
+                db.collection("Search-test", {}, function (err, _coll) {
                     if (err) return done(err);
                     collection = _coll;
                     collection.ensureIndex({num: 1}, {sparse: false, unique: false}, function (err, name) {
