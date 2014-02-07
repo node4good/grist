@@ -1,5 +1,5 @@
 "use strict";
-/*global it */
+/*global it,describe */
 var assert = require('assert');
 var _ = require('lodash');
 var safe = require('safe');
@@ -19,13 +19,14 @@ describe('Basic', function () {
         var test = this;
         tutils.getDb('test', true, function (err, _db) {
             test._db = _db;
-            test._db.collection("test", {}, function (err, _coll) {
+            test.Dbname = "Basic-test-" + Date.now();
+            test._db.collection(test.Dbname, {}, function (err, _coll) {
                 test.coll = _coll;
                 var p = new Promise;
                 p.fulfill();
                 gt0sin = 0;
                 _dt = null;
-                _.times(num, function (i) {
+                var objs = _.times(num, function (i) {
                     var d;
                     if (!_dt) _dt = d = new Date();
                     else d = new Date(_dt.getTime() + 1000 * i);
@@ -43,13 +44,9 @@ describe('Basic', function () {
                     obj.txt = obj.sin > 0 && "greater than zero" || obj.sin < 0 && "less than zero" || "zero";
                     if (obj.sin > 0 && obj.sin < 0.5)
                         gt0sin++;
-                    p = p.then(function () {
-                        return test.coll.insert(obj);
-                    });
+                    return obj;
                 });
-                p.then(function () {
-                    done();
-                }).end();
+                test.coll.insert(objs, done);
             });
         });
     });
@@ -62,26 +59,29 @@ describe('Basic', function () {
                 done(err);
             });
         });
-
-        after(function (done) {
-            this._db.close(done);
-            delete this.coll;
-            delete this._db;
-        });
     });
 
 
     describe('Existing store', function () {
         var db, coll;
         before(function (done) {
+            var test = this;
             tutils.getDb('test', false, function (err, _db) {
                 db = _db;
-                db.collection("test", {}, function (err, _coll) {
+                db.collection(test.Dbname, {}, function (err, _coll) {
                     coll = _coll;
                     done();
                 });
             });
         });
+
+        after(function (done) {
+            coll.drop(function () {
+                done();
+            });
+        });
+
+
         it("Collection.count", function (done) {
             coll.count(function (err, count) {
                 assert.equal(count, num);
@@ -259,10 +259,6 @@ describe('Basic', function () {
                 coll.findOne({pum: 20}, done);
             });
         });
-
-        after(function (done) {
-            db.close(done);
-        });
     });
 });
 
@@ -312,56 +308,81 @@ describe('C.R.U.D.', function () {
     });
 
     describe('Should update', function () {
-        var obj;
         it('create with upsert and $set apply $set to query', function (done) {
-            obj = {j: 3, c: "multi", a: [1, 2, 3, 4, 5]};
-            coll.update({i: 2}, {$set: obj}, {upsert: true}, safe.sure(done, function (n, r) {
-                assert.equal(n, 1);
-                assert.equal(r.updatedExisting, false);
-                assert(r.upserted);
-                coll.findOne({i: 2}, safe.sure(done, function (obj1) {
-                    assert.equal(obj1.i, 2);
+            var obj = this.obj = {j: 3, c: "multi", a: [1, 2, 3, 4, 5]};
+            var q = {i: 2};
+            coll.remove(q).then(
+                function () {
+                    return coll.update(q, {$set: obj}, {upsert: true});
+                }
+            ).then(
+                function (n, r) {
+                    assert.equal(n, 1);
+                    assert.equal(r.updatedExisting, false);
+                    assert(r.upserted);
+                    return coll.findOne(q);
+                }
+            ).then(
+                function (obj1) {
+                    assert.equal(obj1.i, q.i);
                     done();
-                }));
-            }));
+                }
+            ).end();
         });
         it('update array field is possible', function (done) {
-            coll.update({i: 2}, {$set: {a: [1, 2]}}, safe.sure(done, function (n, r) {
-                assert.equal(n, 1);
-                assert.equal(r.updatedExisting, true);
-                coll.findOne({i: 2}, safe.sure(done, function (obj1) {
+            coll.update({i: 2}, {$set: {a: [1, 2]}}).then(
+                function (n, r) {
+                    assert.equal(n, 1);
+                    assert.equal(r.updatedExisting, true);
+                    return coll.findOne({i: 2});
+                }
+            ).then(
+                function (obj1) {
                     assert.deepEqual([1, 2], obj1.a);
                     done();
-                }));
-            }));
+                }
+            ).end();
         });
         it('upsert one more did not touch initial object', function (done) {
-            obj = {j: 4, i: 3, c: "multi", a: [1, 2, 3, 4, 5]};
-            var clone = _.cloneDeep(obj);
-            coll.update({i: 3}, obj, {upsert: true}, safe.sure(done, function (n, r) {
-                assert.equal(n, 1);
-                assert.equal(r.updatedExisting, false);
-                assert(r.upserted);
-                coll.findOne({i: 3}, safe.sure(done, function (obj1) {
+            var obj = this.obj = {j: 4, i: 3, c: "multi", a: [1, 2, 3, 4, 5]};
+            var clone = _.cloneDeep(this.obj);
+            var q = {i: 3};
+            coll.remove(q).then(
+                function () {
+                    return coll.update(q, {$set: obj}, {upsert: true});
+                }
+            ).then(
+                function (n, r) {
+                    assert.equal(n, 1);
+                    assert.equal(r.updatedExisting, false);
+                    assert(r.upserted);
+                    return coll.findOne(q);
+                }
+            ).then(
+                function (obj1) {
                     assert.deepEqual(obj, clone);
                     clone._id = obj1._id;
                     assert.deepEqual(obj1, clone);
                     done();
-                }));
-            }));
+                }
+            ).end();
         });
         it('modify multi changes only specific field for many documents', function (done) {
-            coll.update({c: "multi"}, {$set: {a: []}}, {multi: true}, safe.sure(done, function (n, r) {
-                assert.equal(n, 2);
-                assert.equal(r.updatedExisting, true);
-                coll.find({c: "multi"}).toArray(safe.sure(done, function (docs) {
+            coll.update({c: "multi"}, {$set: {a: []}}, {multi: true}).then(
+                function (n, r) {
+                    assert.equal(n, 2);
+                    assert.equal(r.updatedExisting, true);
+                    return coll.find({c: "multi"}).exec();
+                }
+            ).then(
+                function (docs) {
                     assert(docs[0].j, docs[1].j);
                     _.each(docs, function (doc) {
                         assert.deepEqual(doc.a, []);
                     });
                     done();
-                }));
-            }));
+                }
+            ).end(done);
         });
         it.skip('update with setting of _id field is not possible', function (done) {
             coll.update({c: "multi"}, {$set: {_id: "newId"}}, {multi: true}, function (err) {
@@ -416,4 +437,5 @@ describe('C.R.U.D.', function () {
             });
         });
     });
-});
+})
+;

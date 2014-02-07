@@ -6,55 +6,33 @@ var tutils = require('./utils');
 var _ = require('lodash');
 var tingodb = require('..')({});
 
+
+var COMPACT_TEST_COL_NAME = 'Compact-test-' + Date.now();
+
 describe('Compact', function () {
     var db, coll, items, length, fsize;
 
-    function checkCount(done) {
-        coll.find().count(function (err, count) {
-            if (err) throw err;
-            assert.equal(count, length);
-            done();
-        });
-    }
-
-    function checkData(done) {
-        async.forEachSeries(items, function (item, cb) {
-            coll.findOne({ k: item.k }, safe.sure(cb, function (doc) {
-                if (item.x) {
-                    assert.equal(doc, null);
-                } else {
-                    assert.equal(doc.k, item.k);
-                    assert.equal(doc.v, item.v);
-                }
-                cb();
-            }));
-        }, done);
-    }
-
-    it('Open database', function (done) {
+    before(function (done) {
         tutils.getDb('test', true, safe.sure(done, function (_db) {
             db = _db;
-            done();
+            db.collection(COMPACT_TEST_COL_NAME, {}, safe.sure(done, function (_coll) {
+                coll = _coll;
+                items = _.times(100, function (n) {
+                    return { k: n, v: _.random(100) };
+                });
+                coll.insert(items, { w: 1 }, done);
+            }));
         }));
     });
-    it('Create new collection', function (done) {
-        db.collection('test', {}, safe.sure(done, function (_coll) {
-            coll = _coll;
-            done();
-        }));
-    });
-    it('Add test data', function (done) {
-        items = _.times(100, function (n) {
-            return { k: n, v: _.random(100) };
-        });
-        coll.insert(items, { w: 1 }, done);
-    });
+
+
     it('Count all docs', function (done) {
         coll.find().toArray(function (err, items) {
             length = items.length;
             done();
         });
     });
+
     it('Update some items', function (done) {
         var docs = _.times(30, function () {
             var idx = _.random(items.length - 1);
@@ -66,6 +44,7 @@ describe('Compact', function () {
             coll.update({ k: doc.k }, doc, { w: 1 }, cb);
         }, done);
     });
+
     it('Delete some items', function (done) {
         var count = 50;
         var keys = _.times(count, function () {
@@ -81,6 +60,7 @@ describe('Compact', function () {
         length -= count;
         coll.remove({ k: { $in: keys } }, { w: 1 }, done);
     });
+
     it('Update some items again', function (done) {
         var docs = _.times(30, function () {
             var idx = _.random(items.length - 1);
@@ -99,11 +79,30 @@ describe('Compact', function () {
             done();
         });
     });
-    it('Check count', checkCount);
-    it('Check data', checkData);
+    it('Check count', function checkCount(done) {
+        coll.find().count(function (err, count) {
+            if (err) throw err;
+            assert.equal(count, length);
+            done();
+        });
+    });
+    it('Check data', function checkData(done) {
+        async.forEachSeries(items, function (item, cb) {
+            coll.findOne({ k: item.k }, safe.sure(cb, function (doc) {
+                if (item.x) {
+                    assert.equal(doc, null);
+                } else {
+                    assert.equal(doc.k, item.k);
+                    assert.equal(doc.v, item.v);
+                }
+                cb();
+            }));
+        }, done);
+    });
     it('Close database', function (done) {
         db.close(done);
     });
+
     it('Remember collection size', function (done) {
         fs.stat(coll._filename, safe.sure(done, function (stats) {
             fsize = stats.size;
@@ -117,87 +116,104 @@ describe('Compact', function () {
         }));
     });
     it('Get test collection', function (done) {
-        db.collection('test', {}, safe.sure(done, function (_coll) {
+        db.collection(COMPACT_TEST_COL_NAME, {}, safe.sure(done, function (_coll) {
             coll = _coll;
             done();
         }));
     });
-    it('Check count after reopening db', checkCount);
-    it('Check data after reopening db', checkData);
+    it('Check count after reopening db', function checkCount(done) {
+        coll.find().count(function (err, count) {
+            if (err) throw err;
+            assert.equal(count, length);
+            done();
+        });
+    });
+    it('Check data after reopening db', function checkData(done) {
+        async.forEachSeries(items, function (item, cb) {
+            coll.findOne({ k: item.k }, safe.sure(cb, function (doc) {
+                if (item.x) {
+                    assert.equal(doc, null);
+                } else {
+                    assert.equal(doc.k, item.k);
+                    assert.equal(doc.v, item.v);
+                }
+                cb();
+            }));
+        }, done);
+    });
     it('Check collection size', function (done) {
         fs.stat(coll._filename, safe.sure(done, function (stats) {
             assert(stats.size <= fsize, stats.size + " should be less than " + fsize);
             done();
         }));
     });
-});
 
-describe('Update+Hash', function () {
-    var db, coll, fsize;
-    it('Open database', function (done) {
-        tutils.getDb('test', true, safe.sure(done, function (_db) {
-            db = _db;
-            done();
-        }));
-    });
-    it('Create new collection', function (done) {
-        db.collection('test', {}, safe.sure(done, function (_coll) {
-            coll = _coll;
-            done();
-        }));
-    });
-    it('Add test data', function (done) {
-        coll.insert({ k: 1, v: 123 }, { w: 1 }, done);
-    });
-    it('Remember collection size', function (done) {
-        fs.stat(coll._filename, safe.sure(done, function (stats) {
-            fsize = stats.size;
-            done();
-        }));
-    });
-    it('Update data', function (done) {
-        done(); //coll.update({ k: 1 }, { k: 1, v: 456 }, { w: 1 }, done);
-    });
-    it('Collection should grow', function (done) {
-        fs.stat(coll._filename, safe.sure(done, function (stats) {
-            assert(stats.size >= fsize);
-            fsize = stats.size;
-            done();
-        }));
-    });
-    it('Update with the same value', function (done) {
-        coll.update({ k: 1 }, { k: 1, v: 456 }, { w: 1 }, done);
-    });
-    it('Update data again', function (done) {
-        coll.update({ k: 1 }, { k: 1, v: 789 }, { upsert: true, w: 1 }, done);
-    });
-    it('Ensure data is correct', function (done) {
-        coll.find({ k: 1 }).toArray(safe.sure(done, function (docs) {
-            assert.equal(docs.length, 1);
-            assert.equal(docs[0].v, 789);
-            done();
-        }));
-    });
-});
 
-describe('Store', function () {
-    it('Operations must fail if db is linked to not existent path', function (done) {
-        var Db = tingodb.Db;
-        var db;
-        try {
-            db = new Db('/tmp/some_unexistant_path_667676qwe', {});
-        } catch (e) {
-            assert(e);
-            done();
-            return;
-        }
-        var c = db.collection('test');
-        c.remove({}, function (err) {
-            assert(err);
-            c.insert({  name: 'Chiara', surname: 'Mobily', age: 22 }, function (err) {
-                assert(err);
+    describe('Update+Hash', function () {
+        var db, coll, fsize;
+        before(function (done) {
+            tutils.getDb('test', true, safe.sure(done, function (_db) {
+                db = _db;
+                db.collection('Update+Hash-test-' + Date.now(), {}, safe.sure(done, function (_coll) {
+                    coll = _coll;
+                    coll.insert({ k: 1, v: 123 }, { w: 1 }, done);
+                }));
+            }));
+        });
+
+        it('Remember collection size', function (done) {
+            fs.stat(coll._filename, safe.sure(done, function (stats) {
+                fsize = stats.size;
                 done();
+            }));
+        });
+
+        it('Collection should grow', function (done) {
+            fs.stat(coll._filename, safe.sure(done, function (stats) {
+                assert(stats.size >= fsize);
+                fsize = stats.size;
+                done();
+            }));
+        });
+
+        it('Update with the same value', function (done) {
+            coll.update({ k: 1 }, { k: 1, v: 456 }, { w: 1 }, done);
+        });
+
+        it('Update data again', function (done) {
+            coll.update({ k: 1 }, { k: 1, v: 789 }, { upsert: true, w: 1 }, done);
+        });
+
+        it('Ensure data is correct', function (done) {
+            coll.find({ k: 1 }).toArray(safe.sure(done, function (docs) {
+                assert.equal(docs.length, 1);
+                assert.equal(docs[0].v, 789);
+                done();
+            }));
+        });
+    });
+
+
+    describe('Store', function () {
+        it('Operations must fail if db is linked to not existent path', function (done) {
+            var Db = tingodb.Db;
+            var db;
+            try {
+                db = new Db('/tmp/some_unexistant_path_667676qwe', {});
+            } catch (e) {
+                assert(e);
+                done();
+                return;
+            }
+            var c = db.collection('test');
+            c.remove({}, function (err) {
+                assert(err);
+                c.insert({  name: 'Chiara', surname: 'Mobily', age: 22 }, function (err) {
+                    assert(err);
+                    done();
+                });
             });
         });
     });
+
 });

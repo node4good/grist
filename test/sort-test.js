@@ -25,7 +25,7 @@ describe('Sort Test', function () {
             }));
         });
         it("Create new collection", function (done) {
-            db.collection("test", {}, safe.sure(done, function (_coll) {
+            db.collection("Sort-test", {}, safe.sure(done, function (_coll) {
                 coll = _coll;
                 coll.ensureIndex({ num: 1 }, function () {
                     coll.ensureIndex({ num2: 1 }, function () {

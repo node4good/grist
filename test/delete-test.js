@@ -3,6 +3,9 @@ var async = require('async');
 var safe = require('safe');
 var tutils = require("./utils");
 
+
+var DELETE_TEST_COL_NAME = 'delete-test-' + Date.now();
+
 describe('Delete', function () {
     var db, coll, items, length;
 
@@ -27,28 +30,29 @@ describe('Delete', function () {
         }, done);
     }
 
-    it('Open database', function (done) {
+    before(function (done) {
         tutils.getDb('test', true, safe.sure(done, function (_db) {
             db = _db;
-            done();
+            db.collection(DELETE_TEST_COL_NAME, {}, safe.sure(done, function (_coll) {
+                coll = _coll;
+                items = [
+                    { k: 1, v: 123 },
+                    { k: 2, v: 456 },
+                    { k: 3, v: 789 },
+                    { k: 4, v: 111 }
+                ];
+                length = items.length;
+                coll.insert(items, { w: 1 }, done);
+            }));
         }));
     });
-    it('Create new collection', function (done) {
-        db.collection('test', {}, safe.sure(done, function (_coll) {
-            coll = _coll;
-            done();
-        }));
+
+
+    after(function (done) {
+        coll.drop(done);
     });
-    it('Add test data', function (done) {
-        items = [
-            { k: 1, v: 123 },
-            { k: 2, v: 456 },
-            { k: 3, v: 789 },
-            { k: 4, v: 111 }
-        ];
-        length = items.length;
-        coll.insert(items, { w: 1 }, done);
-    });
+
+
     it('Check count', checkCount);
     it('Check data', checkData);
     it('Delete items', function (done) {
@@ -67,18 +71,18 @@ describe('Delete', function () {
     it('Close database', function (done) {
         db.close(done);
     });
+
+
     it('Reopen database', function (done) {
         tutils.getDb('test', false, safe.sure(done, function (_db) {
             db = _db;
-            done();
+            db.collection(DELETE_TEST_COL_NAME, {}, safe.sure(done, function (_coll) {
+                coll = _coll;
+                done();
+            }));
         }));
     });
-    it('Get test collection', function (done) {
-        db.collection('test', {}, safe.sure(done, function (_coll) {
-            coll = _coll;
-            done();
-        }));
-    });
+
     it('Check count after reopening db', checkCount);
     it('Check data after reopening db', checkData);
 });

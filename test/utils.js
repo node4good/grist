@@ -1,4 +1,4 @@
-var os = require('os');
+//require('trace');
 var fs = require('fs');
 var path = require('path');
 var main = require('../')({});
@@ -10,8 +10,9 @@ module.exports.getDbSync = function (tag, db_options, server_options, drop) {
     if (drop)
         delete paths[tag];
     if (!paths[tag]) {
-        var tempName = path.join(os.tmpDir(), tag + '_' + Date.now());
-        fs.mkdirSync(tempName);
+        var tempName = path.join('test-data', tag);
+        if (!fs.existsSync('test-data')) fs.mkdirSync('test-data');
+        if (!fs.existsSync(tempName)) fs.mkdirSync(tempName);
         paths[tag] = tempName;
     }
     return new main.Db(paths[tag], {name: tag});
