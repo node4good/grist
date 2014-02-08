@@ -2,7 +2,7 @@ var assert = require('assert');
 var safe = require('safe');
 var tutils = require("./utils");
 
-describe.only('Incremental update', function () {
+describe('Incremental update', function () {
     var db, renameColl;
     before(function (done) {
         tutils.getDb('test', true, function (___, _db) {
@@ -101,26 +101,23 @@ describe.only('Incremental update', function () {
 
 
     describe("$setOnInsert", function () {
-        var coll;
+        var setOnInsertColl;
         before(function (done) {
             db.collection("setOnInsert").then(function (_coll) {
-                coll = _coll;
-                done();
+                setOnInsertColl = _coll;
+                setOnInsertColl.drop(done);
             });
         });
 
-        after(function (done) {
-            coll.drop(done);
-        });
 
         it("#1 $setOnInsert on update", function (done) {
-            coll.update(
+            setOnInsertColl.update(
                 {_id: 1},
                 {$setOnInsert: {name: "John", sub: {gender: "male"}}},
                 {upsert: true}
             ).then(
                 function () {
-                    return coll.findOne({_id: 1});
+                    return setOnInsertColl.findOne({_id: 1});
                 }
             ).then(
                 function (obj) {
@@ -130,15 +127,17 @@ describe.only('Incremental update', function () {
             ).end();
         });
 
-        it("#1 $setOnInsert on findAndUpdate", function (done) {
-            coll.findAndModify(
+        it("#1 $setOnInsert on findAndModify", function (done) {
+            setOnInsertColl.findAndModify(
                 {_id: 2},
                 {},
                 {$setOnInsert: {name: "John", sub: {gender: "male"}}},
                 {upsert: true, 'new': true}
             ).then(
                 function (obj) {
-                    assert.deepEqual(obj, {"_id": 2, "name": "John", "sub": {"gender": "male"}});
+                    assert.deepEqual(obj, [
+                        {"_id": 2, "name": "John", "sub": {"gender": "male"}}
+                    ]);
                     done();
                 }
             ).end();
