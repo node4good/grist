@@ -222,7 +222,7 @@ describe('Basic', function () {
                     assert.equal(obj.sub.tub, 10);
                     assert.equal(obj.sin, null);
                     done(err);
-                });
+                }).end();
             });
         });
 
@@ -384,8 +384,8 @@ describe('C.R.U.D.', function () {
                 }
             ).end(done);
         });
-        it.skip('update with setting of _id field is not possible', function (done) {
-            coll.update({c: "multi"}, {$set: {_id: "newId"}}, {multi: true}, function (err) {
+        it('update with setting of _id field is not possible', function (done) {
+            coll.update({c: "multi"}, {$set: {_id: "newId"}}, {multi: true}, function (err, res) {
                 assert(err);
                 done();
             });

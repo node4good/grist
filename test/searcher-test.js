@@ -18,45 +18,37 @@ describe('Search', function () {
     describe('Search Array', function () {
         var db, coll;
         before(function (done) {
-            tutils.getDb('test', true, safe.sure(done, function (_db) {
+            tutils.getDb('test', true, function (err, _db) {
+                if (err) throw err;
                 db = _db;
-                db.collection("Search Array test1", {}, safe.sure(done, function (_coll) {
+                db.collection("Search Array test1", {}, function (err, _coll) {
+                    if (err) throw err;
                     coll = _coll;
-                    coll.ensureIndex({"arr.num": 1}, {sparse: false, unique: false, _tiarr: true}, safe.sure(done, function () {
-                        coll.ensureIndex({"tags": 1}, {sparse: false, unique: false, _tiarr: true}, safe.sure(done, function () {
-                            coll.ensureIndex({"nested.tags": 1}, {sparse: false, unique: false, _tiarr: true}, safe.sure(done, function (name) {
-                                assert.ok(name);
-                                var i = 1;
-                                var objs = [];
-                                while (i <= num) {
-                                    var arr = [], arr2 = [], j, obj;
-                                    for (j = i; j < i + 10; j++) {
-                                        obj = {num: j, pum: j, sub: {num: j, pum: j}};
-                                        if (i % 7 === 0) {
-                                            delete obj.num;
-                                            delete obj.pum;
-                                        }
-                                        arr.push(obj);
-                                        arr2.push(JSON.parse(JSON.stringify(obj)));
-                                    }
-                                    for (j = 0; j < 10; j++) {
-                                        arr[j].sub.arr = arr2;
-                                    }
-                                    obj = {num: i, pum: i, arr: arr, tags: ["tag" + i, "tag" + (i + 1)], nested: {tags: ["tag" + i, "tag" + (i + 1)]}};
-                                    objs.push(obj);
-                                    i++;
+                    coll.drop(function () {
+                        var i = 1;
+                        var objs = [];
+                        while (i <= num) {
+                            var arr = [], arr2 = [], j, obj;
+                            for (j = i; j < i + 10; j++) {
+                                obj = {num: j, pum: j, sub: {num: j, pum: j}};
+                                if (i % 7 === 0) {
+                                    delete obj.num;
+                                    delete obj.pum;
                                 }
-                                coll.insert(objs, done);
-                            }));
-                        }));
-                    }));
-                }));
-            }));
-        });
-
-
-        after(function (done) {
-            coll.drop(done);
+                                arr.push(obj);
+                                arr2.push(JSON.parse(JSON.stringify(obj)));
+                            }
+                            for (j = 0; j < 10; j++) {
+                                arr[j].sub.arr = arr2;
+                            }
+                            obj = {num: i, pum: i, arr: arr, tags: ["tag" + i, "tag" + (i + 1)], nested: {tags: ["tag" + i, "tag" + (i + 1)]}};
+                            objs.push(obj);
+                            i++;
+                        }
+                        coll.insert(objs, done);
+                    });
+                });
+            });
         });
 
 
@@ -365,9 +357,8 @@ describe('Search', function () {
                 db.collection("Search-test", {}, function (err, _coll) {
                     if (err) return done(err);
                     collection = _coll;
-                    collection.ensureIndex({num: 1}, {sparse: false, unique: false}, function (err, name) {
+                    collection.drop(function (err) {
                         if (err) return done(err);
-                        assert.ok(name);
                         var objs = [];
                         _.times(NUMBER_OF_DOCS, function (i) {
                             var timestamp = new Date();
@@ -398,11 +389,6 @@ describe('Search', function () {
                     });
                 });
             });
-        });
-
-
-        after(function (done) {
-            collection.drop(done);
         });
 
 
@@ -692,4 +678,5 @@ describe('Search', function () {
             }));
         });
     });
-});
+})
+;
