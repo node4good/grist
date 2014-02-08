@@ -2,35 +2,47 @@ var assert = require('assert');
 var safe = require('safe');
 var tutils = require("./utils");
 
-describe('Incremental update', function () {
-    var db;
+describe.only('Incremental update', function () {
+    var db, renameColl;
     before(function (done) {
-        tutils.getDb('test', true, safe.sure(done, function (_db) {
+        tutils.getDb('test', true, function (___, _db) {
             db = _db;
-            done();
-        }));
+            db.collection("rename", {}).then(
+                function (_coll) {
+                    renameColl = _coll;
+                    renameColl.drop(done);
+                }
+            );
+        });
     });
     describe("$rename", function () {
         it("#1 $rename basics", function (done) {
-            db.collection("rename", {}, safe.sure(done, function (_coll) {
-                _coll.insert({_id: 1, tcores: 1, nmame: "john"}, safe.sure(done, function () {
-                    _coll.update({_id: 1}, {$rename: {tcores: "scores", nmame: "name"}}, safe.sure(done, function () {
-                        _coll.findOne({_id: 1}, safe.sure(done, function (obj) {
-                            assert.deepEqual(obj, {_id: 1, scores: 1, name: "john"});
-                            done();
-                        }));
-                    }));
-                }));
-            }));
+            var oobj = {_id: 1, tcores: 1, nmame: "john"};
+            renameColl.insert(
+                    oobj
+                ).then(
+                function (iobjs) {
+                    assert.deepEqual(iobjs[0], oobj);
+                    return renameColl.update({_id: 1}, {$rename: {tcores: "scores", nmame: "name"}});
+                }
+            ).then(
+                function (n) {
+                    assert.equal(n, 1);
+                    return renameColl.findOne({_id: 1});
+                }
+            ).then(
+                function (obj) {
+                    assert.deepEqual(obj, {_id: 1, scores: 1, name: "john"});
+                    done();
+                }
+            ).end();
         });
         it("#1 $rename move", function (done) {
-            db.collection("rename", {}, safe.sure(done, function (_coll) {
-                _coll.insert({_id: 2, user: {name: "john"}}, safe.sure(done, function () {
-                    _coll.update({_id: 2}, {$rename: {"user.name": "contact.fname"}}, safe.sure(done, function () {
-                        _coll.findOne({_id: 2}, safe.sure(done, function (obj) {
-                            assert.deepEqual(obj, {_id: 2, user: {}, contact: {fname: "john"}});
-                            done();
-                        }));
+            renameColl.insert({_id: 2, user: {name: "john"}}, safe.sure(done, function () {
+                renameColl.update({_id: 2}, {$rename: {"user.name": "contact.fname"}}, safe.sure(done, function () {
+                    renameColl.findOne({_id: 2}, safe.sure(done, function (obj) {
+                        assert.deepEqual(obj, {_id: 2, user: {}, contact: {fname: "john"}});
+                        done();
                     }));
                 }));
             }));
@@ -86,26 +98,54 @@ describe('Incremental update', function () {
             }));
         });
     });
-    describe.skip("$setOnInsert", function () {
-        it("#1 $setOnInsert on update", function (done) {
-            db.collection("setOnInsert", {}, safe.sure(done, function (_coll) {
-                _coll.update({_id: 1}, {$setOnInsert: {name: "John", sub: {gender: "male"}}}, {upsert: true}, safe.sure(done, function () {
-                    _coll.findOne({_id: 1}, safe.sure(done, function (obj) {
-                        assert.deepEqual(obj, {"_id": 1, "name": "John", "sub": {"gender": "male"}});
-                        done();
-                    }));
-                }));
-            }));
+
+
+    describe("$setOnInsert", function () {
+        var coll;
+        before(function (done) {
+            db.collection("setOnInsert").then(function (_coll) {
+                coll = _coll;
+                done();
+            });
         });
+
+        after(function (done) {
+            coll.drop(done);
+        });
+
+        it("#1 $setOnInsert on update", function (done) {
+            coll.update(
+                {_id: 1},
+                {$setOnInsert: {name: "John", sub: {gender: "male"}}},
+                {upsert: true}
+            ).then(
+                function () {
+                    return coll.findOne({_id: 1});
+                }
+            ).then(
+                function (obj) {
+                    assert.deepEqual(obj, {"_id": 1, "name": "John", "sub": {"gender": "male"}});
+                    done();
+                }
+            ).end();
+        });
+
         it("#1 $setOnInsert on findAndUpdate", function (done) {
-            db.collection("setOnInsert", {}, safe.sure(done, function (_coll) {
-                _coll.findAndModify({_id: 2}, {}, {$setOnInsert: {name: "John", sub: {gender: "male"}}}, {upsert: true, 'new': true}, safe.sure(done, function (obj) {
+            coll.findAndModify(
+                {_id: 2},
+                {},
+                {$setOnInsert: {name: "John", sub: {gender: "male"}}},
+                {upsert: true, 'new': true}
+            ).then(
+                function (obj) {
                     assert.deepEqual(obj, {"_id": 2, "name": "John", "sub": {"gender": "male"}});
                     done();
-                }));
-            }));
+                }
+            ).end();
         });
     });
+
+
     describe("$unset", function () {
         it("#1 $unset basics", function (done) {
             db.collection("unset", {}, safe.sure(done, function (_coll) {
@@ -363,4 +403,5 @@ describe('Incremental update', function () {
         });
     });
 
-});
+})
+;

@@ -13,7 +13,7 @@ describe('Misc', function () {
             db = _db;
             db.collection('Misc', {}, safe.sure(done, function (_coll) {
                 coll = _coll;
-                done();
+                coll.drop(done);
             }));
         }));
     });
@@ -29,13 +29,15 @@ describe('Misc', function () {
             var cursor = coll.find();
             cursor.count(safe.sure(done, function (res) {
                 assert.equal(res, 1);
-                cursor.toArray(done);
+                cursor.toArray(function () {
+                    coll.drop(done);
+                });
             }));
         }));
     });
 
 
-    it.skip('GH-14 Exclude projection for _id can be mixed with include projections', function (done) {
+    it('GH-14 Exclude projection for _id can be mixed with include projections', function (done) {
         coll.insert({name: 'Tony', age: '37'}, safe.sure(done, function () {
             coll.findOne({}, {_id: 0, age: 1}, safe.sure(done, function (obj) {
                 assert(!_.contains(_.keys(obj), '_id'));
@@ -55,7 +57,7 @@ describe('Misc', function () {
                             assert(_.contains(_.keys(obj), 'name'));
                             coll.findOne({}, {_id: 1, age: 0}, function (err) {
                                 assert(err);
-                                done();
+                                coll.drop(done);
                             });
                         }));
                     }));
