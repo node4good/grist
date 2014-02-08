@@ -4,7 +4,7 @@ var fs = require('fs');
 var safe = require('safe');
 var tutils = require('./utils');
 var _ = require('lodash');
-var tingodb = require('..')({});
+var tingodb = require('..');
 
 
 var COMPACT_TEST_COL_NAME = 'Compact-test-' + Date.now();
@@ -196,7 +196,7 @@ describe('Compact', function () {
 
     describe('Store', function () {
         it('Operations must fail if db is linked to not existent path', function (done) {
-            var Db = tingodb.Db;
+            var Db = tingodb;
             var db;
             try {
                 db = new Db('/tmp/some_unexistant_path_667676qwe', {});

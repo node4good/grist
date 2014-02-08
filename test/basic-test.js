@@ -271,9 +271,7 @@ describe('C.R.U.D.', function () {
             db = _db;
             db.collection("test", {}, function (err, _coll) {
                 coll = _coll;
-                coll.ensureIndex({i: 1}, function () {
-                    done();
-                });
+                done();
             });
         });
     });

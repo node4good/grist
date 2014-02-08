@@ -23,36 +23,29 @@ describe('Sort Test', function () {
             db = _db;
             db.collection("Sort-test", {}, safe.sure(done, function (_coll) {
                 coll = _coll;
-                coll.ensureIndex({ num: 1 }, function () {
-                    coll.ensureIndex({ num2: 1 }, function () {
-                        coll.ensureIndex({ inul: 1 }, function () {
-
-                            var nums = _.times(10000, function () {
-                                return _.random(100);
-                            });
-                            var docs = nums.map(function (num) {
-                                var doc = { num: num, num2: 100 - num, val: num, nul: num, inul: num };
-                                if (num % 33 === 0) {
-                                    delete doc.nul;
-                                    delete doc.inul;
-                                }
-                                if (num % 21 === 0) {
-                                    doc.nul = doc.inul = null;
-                                }
-                                return doc;
-                            });
-                            asc = docs.slice().sort(function (a, b) {
-                                return a.num - b.num;
-                            });
-                            desc = asc.slice().reverse();
-                            gt = _.filter(asc, function (x) {
-                                return x.num > 25;
-                            });
-                            gtr = gt.slice().reverse();
-                            coll.insert(docs, done);
-                        });
-                    });
+                var nums = _.times(10000, function () {
+                    return _.random(100);
                 });
+                var docs = nums.map(function (num) {
+                    var doc = { num: num, num2: 100 - num, val: num, nul: num, inul: num };
+                    if (num % 33 === 0) {
+                        delete doc.nul;
+                        delete doc.inul;
+                    }
+                    if (num % 21 === 0) {
+                        doc.nul = doc.inul = null;
+                    }
+                    return doc;
+                });
+                asc = docs.slice().sort(function (a, b) {
+                    return a.num - b.num;
+                });
+                desc = asc.slice().reverse();
+                gt = _.filter(asc, function (x) {
+                    return x.num > 25;
+                });
+                gtr = gt.slice().reverse();
+                coll.insert(docs, done);
             }));
         }));
     });
