@@ -14,13 +14,13 @@ var words = ["Sergey Brin", "Serg Kosting", "Pupking Sergey", "Munking Sirgey"];
 var num = 100;
 
 
-describe('Search Array', function () {
-    describe('New store', function () {
+describe('Search', function () {
+    describe('Search Array', function () {
         var db, coll;
         before(function (done) {
             tutils.getDb('test', true, safe.sure(done, function (_db) {
                 db = _db;
-                db.collection("Search Array test1 " + Date.now(), {}, safe.sure(done, function (_coll) {
+                db.collection("Search Array test1", {}, safe.sure(done, function (_coll) {
                     coll = _coll;
                     coll.ensureIndex({"arr.num": 1}, {sparse: false, unique: false, _tiarr: true}, safe.sure(done, function () {
                         coll.ensureIndex({"tags": 1}, {sparse: false, unique: false, _tiarr: true}, safe.sure(done, function () {
@@ -52,6 +52,11 @@ describe('Search Array', function () {
                     }));
                 }));
             }));
+        });
+
+
+        after(function (done) {
+            coll.drop(done);
         });
 
 
@@ -348,12 +353,10 @@ describe('Search Array', function () {
             }));
         });
     });
-});
 
 
-describe('Search', function () {
-    this.timeout(60 * 60 * 1000);
-    describe('New store', function () {
+    describe('Search General', function () {
+        this.timeout(60 * 60 * 1000);
         var db, collection;
         before(function (done) {
             tutils.getDb('test', true, function (err, _db) {
@@ -395,6 +398,11 @@ describe('Search', function () {
                     });
                 });
             });
+        });
+
+
+        after(function (done) {
+            collection.drop(done);
         });
 
 

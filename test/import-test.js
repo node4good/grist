@@ -33,30 +33,34 @@ var rowcount = 500;
 
 describe('Import', function () {
     describe('New store', function () {
+        var collName = 'Import-' + rowcount;
         var db, coll;
         var sample = __dirname + '/sample-data/' + rowcount + '.csv.gz';
         before(function (done) {
             tutils.getDb('test', true, safe.sure(done, function (_db) {
                 db = _db;
-                done();
+                db.collection(collName, {}, safe.sure(done, function (_coll) {
+                    coll = _coll;
+                    var docs = [];
+                    load(sample, function (value, index, callback) {
+                            docs.push(value);
+                            callback();
+                        }, function () {
+                            coll.insert(docs, done);
+                        }
+                    );
+
+                }));
+
             }));
         });
-        it("Create new collection", function (done) {
-            db.collection('c' + rowcount, {}, safe.sure(done, function (_coll) {
-                coll = _coll;
-                done();
-            }));
+
+
+        after(function (done) {
+            coll.drop(done);
         });
-        it("Populated with test data", function (done) {
-            var docs = [];
-            load(sample, function (value, index, callback) {
-                    docs.push(value);
-                    callback();
-                }, function () {
-                    coll.insert(docs, done);
-                }
-            );
-        });
+
+
         it("Has right size", function (done) {
             coll.count(safe.sure(done, function (count) {
                 assert.equal(count, rowcount);
