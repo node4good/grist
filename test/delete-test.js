@@ -18,7 +18,7 @@ describe('Delete', function () {
 
     function checkData(done) {
         async.forEach(items, function (item, cb) {
-            coll.findOne({ k: item.k }, safe.sure(cb, function (doc) {
+            coll.findOne({ k: item.k }).then(function (doc) {
                 if (item.x) {
                     assert.equal(doc, null);
                 } else {
@@ -26,7 +26,7 @@ describe('Delete', function () {
                     assert.equal(doc.v, item.v);
                 }
                 cb();
-            }));
+            }).end();
         }, done);
     }
 
@@ -66,6 +66,7 @@ describe('Delete', function () {
         length -= keys.length;
         coll.remove({ k: { $in: keys } }, { w: 1 }, done);
     });
+
     it('Check count after remove', checkCount);
     it('Check data after remove', checkData);
     it('Close database', function (done) {
@@ -85,4 +86,13 @@ describe('Delete', function () {
 
     it('Check count after reopening db', checkCount);
     it('Check data after reopening db', checkData);
+
+    it('FindAndRemove', function (done) {
+        coll.findAndRemove({k: 1}).then(function (objs) {
+            assert.equal(objs.length, 1);
+            assert.equal(objs[0].k, 1);
+            assert.equal(objs[0].v, 123);
+            done();
+        });
+    });
 });

@@ -290,12 +290,15 @@ describe('C.R.U.D.', function () {
         });
         it('modify it', function (done) {
             obj.i++;
-            coll.save(obj, safe.sure(done, function () {
-                coll.findOne({_id: obj._id}, safe.sure(done, function (obj1) {
-                    assert.deepEqual(obj, obj1);
-                    done();
-                }));
-            }));
+            coll.save(obj).then(
+                function () {
+                    return coll.findOne({_id: obj._id});
+                }
+            ).then(
+                function (obj1) {
+                    assert.deepEqual(obj1, obj);
+                }
+            ).onResolve(done);
         });
         it('delete it', function (done) {
             coll.remove({_id: obj._id}, safe.sure(done, function () {
@@ -386,6 +389,7 @@ describe('C.R.U.D.', function () {
         });
         it('update with setting of _id field is not possible', function (done) {
             coll.update({c: "multi"}, {$set: {_id: "newId"}}, {multi: true}, function (err, res) {
+                assert(_.isUndefined(res));
                 assert(err);
                 done();
             });
