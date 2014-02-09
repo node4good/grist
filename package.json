@@ -23,7 +23,8 @@
     "then-fs": "",
     "sift": "",
     "git-node": "",
-    "mquery": ""
+      "mquery": "",
+      "mosour": ""
   },
   "scripts": {
       "test": "mocha",
