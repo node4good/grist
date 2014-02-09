@@ -10,9 +10,9 @@
     "mongodb",
     "yaml"
   ],
-  "main": "./lib/index",
-  "engines": {
-    "node": ">= 0.11.x"
+    "main": "lib/index",
+    "engines": {
+        "node": ">= 0.11.x"
   },
   "dependencies": {
     "lodash": "",
@@ -26,7 +26,9 @@
     "mquery": ""
   },
   "scripts": {
-    "test": "mocha"
+      "test": "mocha",
+      "cover": "istanbul cover ./node_modules/mocha/bin/_mocha",
+      "postpublish": "git push origin master --tags"
   },
   "devDependencies": {
     "csv": "",
@@ -34,5 +36,6 @@
     "step": "",
     "benchmark": "",
     "mocha": ""
-  }
+  },
+    "license": "MIT"
 }
