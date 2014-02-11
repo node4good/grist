@@ -4,8 +4,7 @@ var fs = require('fs'),
     _ = require('lodash'),
     safe = require('safe'),
     PotusCollection = require('./collection.js'),
-    tingo = require('./'),
-    Db = tingo.Db;
+    Db = require('./');
 
 function Connection(base) {
     this.base = base;

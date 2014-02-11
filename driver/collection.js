@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var Collection = require('./').Collection;
+var Collection = require('../lib/Collection-base');
 var util = require('util');
 
 function PotusCollection(name, conn, opts) {
