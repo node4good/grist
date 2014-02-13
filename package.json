@@ -1,7 +1,7 @@
 {
   "author": "Refael Ackermann<refael@empeeric.com>",
   "name": "puny",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Embedded Node.js document store upward compatible with MongoDB",
   "keywords": [
     "database",
@@ -10,9 +10,9 @@
     "mongodb",
     "yaml"
   ],
-    "main": "lib/index",
-    "engines": {
-        "node": ">= 0.11.x"
+  "main": "lib/index",
+  "engines": {
+    "node": ">= 0.11.x"
   },
   "dependencies": {
     "lodash": "",
@@ -20,15 +20,15 @@
     "safe": "",
     "async": "",
     "mpromise": "beta",
-      "sift": "git+https://github.com/Empeeric/sift.js.git",
+    "sift": "git+https://github.com/Empeeric/sift.js.git",
     "git-node": "",
-      "mquery": "",
-      "mosour": ""
+    "mquery": "",
+    "mosour": ""
   },
   "scripts": {
-      "test": "mocha",
-      "cover": "istanbul cover ./node_modules/mocha/bin/_mocha",
-      "postpublish": "git push origin master --tags"
+    "test": "mocha",
+    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha",
+    "postpublish": "git push origin master --tags"
   },
   "devDependencies": {
     "csv": "",
@@ -37,5 +37,5 @@
     "benchmark": "",
     "mocha": ""
   },
-    "license": "MIT"
+  "license": "MIT"
 }
