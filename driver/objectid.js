@@ -1,3 +1,4 @@
-module.exports = require('./').ObjectID;
+module.
+exports = require('../lib/ObjectId');
 
 
