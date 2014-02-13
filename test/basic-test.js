@@ -3,7 +3,6 @@
 var assert = require('assert');
 var _ = require('lodash');
 var safe = require('safe');
-var Promise = require('mpromise');
 
 var loremIpsum = require('lorem-ipsum');
 var tutils = require("./utils");
@@ -19,34 +18,34 @@ describe('Basic', function () {
         var test = this;
         tutils.getDb('test', true, function (err, _db) {
             test._db = _db;
-            test.Dbname = "Basic-test-" + Date.now();
+            test.Dbname = "Basic-test";
             test._db.collection(test.Dbname, {}, function (err, _coll) {
                 test.coll = _coll;
-                var p = new Promise;
-                p.fulfill();
-                gt0sin = 0;
-                _dt = null;
-                var objs = _.times(num, function (i) {
-                    var d;
-                    if (!_dt) _dt = d = new Date();
-                    else d = new Date(_dt.getTime() + 1000 * i);
-                    var obj = {
-                        _dt: d,
-                        dum: parseInt(i / 2),
-                        num: i,
-                        pum: i,
-                        sub: {num: i},
-                        sin: Math.sin(i),
-                        cos: Math.cos(i),
-                        t: 15,
-                        junk: loremIpsum({count: 1, units: "paragraphs"})
-                    };
-                    obj.txt = obj.sin > 0 && "greater than zero" || obj.sin < 0 && "less than zero" || "zero";
-                    if (obj.sin > 0 && obj.sin < 0.5)
-                        gt0sin++;
-                    return obj;
+                test.coll.drop().then(function () {
+                    gt0sin = 0;
+                    _dt = null;
+                    var objs = _.times(num, function (i) {
+                        var d;
+                        if (!_dt) _dt = d = new Date();
+                        else d = new Date(_dt.getTime() + 1000 * i);
+                        var obj = {
+                            _dt: d,
+                            dum: parseInt(i / 2),
+                            num: i,
+                            pum: i,
+                            sub: {num: i},
+                            sin: Math.sin(i),
+                            cos: Math.cos(i),
+                            t: 15,
+                            junk: loremIpsum({count: 1, units: "paragraphs"})
+                        };
+                        obj.txt = obj.sin > 0 && "greater than zero" || obj.sin < 0 && "less than zero" || "zero";
+                        if (obj.sin > 0 && obj.sin < 0.5)
+                            gt0sin++;
+                        return obj;
+                    });
+                    test.coll.insert(objs, done);
                 });
-                test.coll.insert(objs, done);
             });
         });
     });
@@ -74,13 +73,6 @@ describe('Basic', function () {
                 });
             });
         });
-
-        after(function (done) {
-            coll.drop(function () {
-                done();
-            });
-        });
-
 
         it("Collection.count", function (done) {
             coll.count(function (err, count) {
