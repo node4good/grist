@@ -1,1 +1,2 @@
-module.exports = require('./').Binary;
+module.
+exports = require('../lib/Binary');
