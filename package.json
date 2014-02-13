@@ -20,8 +20,7 @@
     "safe": "",
     "async": "",
     "mpromise": "beta",
-    "then-fs": "",
-    "sift": "",
+      "sift": "git+https://github.com/Empeeric/sift.js.git",
     "git-node": "",
       "mquery": "",
       "mosour": ""
