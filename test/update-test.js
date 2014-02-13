@@ -276,7 +276,7 @@ describe('Incremental update', function () {
         it("#1 $pop basics", function (done) {
             db.collection("pop", {}, safe.sure(done, function (_coll) {
                 _coll.insert({_id: 1, sub: {scores: [11, 12]}, scores: [25, 27], age: [16, 17, 18], ratings: [3, 4, 5]}, safe.sure(done, function () {
-                    _coll.update({_id: 1}, {$pop: {scores: -1, age: 1, ratings: 2, "sub.scores": -1}}, safe.sure(done, function () {
+                    _coll.update({_id: 1}, {$pop: {scores: -1, age: 1, ratings: 1, "sub.scores": -1}}, safe.sure(done, function () {
                         _coll.findOne({_id: 1}, safe.sure(done, function (obj) {
                             assert.deepEqual(obj.scores, [27]);
                             assert.deepEqual(obj.age, [16, 17]);
