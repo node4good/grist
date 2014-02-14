@@ -1,6 +1,4 @@
-var _ = require('lodash');
 var assert = require('assert');
-var async = require('async');
 var csv = require('csv');
 var fs = require('fs');
 var zlib = require('zlib');
@@ -8,10 +6,12 @@ var tutils = require("./utils");
 
 var rowcount = 500;
 
+
 describe('Stress', function () {
     var coll;
     var collName = 'Import-' + rowcount;
     var sample = __dirname + '/sample-data/' + rowcount + '.csv.gz';
+
     before(function (done) {
         tutils.getDb('test', true, function (err, db) {
             if (err) throw err;
@@ -25,26 +25,17 @@ describe('Stress', function () {
 
 
     it("Load", function (done) {
-        var iterator = coll.insert.bind(coll);
-        var schema;
-        var queue = async.queue(function (value, cb) {
-            if (_.isEmpty(value)) return done();
-            iterator(value, cb);
-        }, 1);
-        var gunzip = zlib.createGunzip();
-        fs.createReadStream(sample).pipe(gunzip);
-        csv().from.stream(gunzip).on('record', function (row, index) {
-            if (index === 0) schema = row;
-            else {
-                var value = { id: index };
-                row.forEach(function (item, i) {
-                    value[schema[i]] = item;
-                });
-                queue.push(value);
-            }
-        }).on('end', function () {
-            queue.push({});
-        });
+        var fileStream = fs.createReadStream(sample).pipe(zlib.createGunzip());
+        csv().from
+            .stream(fileStream, {columns: true})
+            .transform(function (row, idx, callback) {
+                row._id = idx;
+                coll.insert(row, callback);
+            })
+            .on('end', function (cnt) {
+                assert.equal(cnt, rowcount);
+                done();
+            });
     });
 
 
@@ -53,5 +44,24 @@ describe('Stress', function () {
             assert.equal(count, rowcount);
             done();
         });
+    });
+
+
+    it("Check", function (done) {
+        var fileStream = fs.createReadStream(sample).pipe(zlib.createGunzip());
+        csv().from
+            .stream(fileStream, {columns: true})
+            .transform(function (row, idx, callback) {
+                row._id = idx;
+                coll.findOne({_id: idx}, function (err, datum) {
+                    if (err) throw err;
+                    assert.deepEqual(datum, row);
+                    callback();
+                });
+            })
+            .on('end', function (cnt) {
+                assert.equal(cnt, rowcount);
+                done();
+            });
     });
 });
