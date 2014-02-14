@@ -1,42 +1,43 @@
 {
-  "author": "Refael Ackermann<refael@empeeric.com>",
-  "name": "puny",
-  "version": "1.0.7",
-  "description": "Embedded document store upward compatible with MongoDB",
-  "repository": "Empeeric/puny",
-  "keywords": [
-    "database",
-    "datastore",
-    "embedded",
-    "mongodb",
-    "git",
-    "json"
-  ],
-  "main": "lib/index",
-  "engines": {
-    "node": ">= 0.10.x"
-  },
-  "dependencies": {
-    "lodash": "",
-    "lodash-contrib": "",
-    "safe": "",
-    "async": "",
-    "mpromise": "beta",
-    "sift": "Empeeric/sift.js.git",
-    "grist": "",
-    "git-node": "",
-    "mquery": ""
-  },
-  "scripts": {
-    "test": "mocha",
-    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha",
-    "postpublish": "git push origin master --tags"
-  },
-  "devDependencies": {
-    "csv": "",
-    "lorem-ipsum": "",
-    "benchmark": "",
-    "mocha": ""
-  },
-  "license": "MIT"
+    "author": "Refael Ackermann<refael@empeeric.com>",
+    "name": "puny",
+    "version": "1.0.7",
+    "description": "Embedded document store upward compatible with MongoDB",
+    "repository": "Empeeric/puny",
+    "keywords": [
+        "database",
+        "datastore",
+        "embedded",
+        "mongodb",
+        "git",
+        "json"
+    ],
+    "main": "lib/index",
+    "engines": {
+        "node": ">= 0.10.x"
+    },
+    "dependencies": {
+        "lodash": "",
+        "lodash-contrib": "",
+        "safe": "",
+        "async": "",
+        "mpromise": "beta",
+        "sift": "Empeeric/sift.js.git",
+        "grist": "",
+        "git-node": "",
+        "mquery": ""
+    },
+    "scripts": {
+        "test": "mocha",
+        "cover": "istanbul cover ./node_modules/mocha/bin/_mocha",
+        "postpublish": "git push origin master --tags"
+    },
+    "devDependencies": {
+        "trace": "",
+        "csv": "",
+        "lorem-ipsum": "",
+        "benchmark": "",
+        "mocha": ""
+    },
+    "license": "MIT"
 }

@@ -1,87 +1,57 @@
+var _ = require('lodash');
 var assert = require('assert');
 var async = require('async');
 var csv = require('csv');
 var fs = require('fs');
 var zlib = require('zlib');
-var _ = require('lodash');
-var safe = require('safe');
 var tutils = require("./utils");
-
-function load(file, iterator, callback) {
-    var schema;
-    var queue = async.queue(function (task, cb) {
-        if (task.value) iterator(task.value, task.index, cb);
-        else callback();
-    }, 1);
-    var gunzip = zlib.createGunzip();
-    fs.createReadStream(file).pipe(gunzip);
-    csv().from.stream(gunzip).on('record',function (row, index) {
-        if (index === 0) schema = row;
-        else {
-            var value = { id: index };
-            row.forEach(function (item, i) {
-                value[schema[i]] = item;
-            });
-            queue.push({ value: value, index: index });
-        }
-    }).on('end', function () {
-        queue.push({});
-    });
-}
 
 var rowcount = 500;
 
-describe('Import', function () {
-    describe('New store', function () {
-        var collName = 'Import-' + rowcount;
-        var db, coll;
-        var sample = __dirname + '/sample-data/' + rowcount + '.csv.gz';
-        before(function (done) {
-            tutils.getDb('test', true, safe.sure(done, function (_db) {
-                db = _db;
-                db.collection(collName, {}, safe.sure(done, function (_coll) {
-                    coll = _coll;
-                    var docs = [];
-                    load(sample, function (value, index, callback) {
-                            docs.push(value);
-                            callback();
-                        }, function () {
-                            coll.insert(docs, done);
-                        }
-                    );
-
-                }));
-
-            }));
+describe('Stress', function () {
+    var coll;
+    var collName = 'Import-' + rowcount;
+    var sample = __dirname + '/sample-data/' + rowcount + '.csv.gz';
+    before(function (done) {
+        tutils.getDb('test', true, function (err, db) {
+            if (err) throw err;
+            db.collection(collName, {}, function (err, _coll) {
+                if (err) throw err;
+                coll = _coll;
+                coll.drop(done);
+            });
         });
+    });
 
 
-        after(function (done) {
-            coll.drop(done);
-        });
-
-
-        it("Has right size", function (done) {
-            coll.count(safe.sure(done, function (count) {
-                assert.equal(count, rowcount);
-                done();
-            }));
-        });
-        it("test find $eq", function (done) {
-            load(sample, function (value, index, callback) {
-                if (Math.random() > 10 / rowcount) return process.nextTick(callback); // ~10 rows
-                coll.find({ id: value.id }, function (err, docs) {
-                    if (err) return callback(err);
-                    docs.toArray(function (err, rows) {
-                        if (err) return callback(err);
-                        assert.equal(rows.length, 1);
-                        _.each(value, function (v, k) {
-                            assert.equal(v, rows[0][k]);
-                        });
-                        callback();
-                    });
+    it("Load", function (done) {
+        var iterator = coll.insert.bind(coll);
+        var schema;
+        var queue = async.queue(function (value, cb) {
+            if (_.isEmpty(value)) return done();
+            iterator(value, cb);
+        }, 1);
+        var gunzip = zlib.createGunzip();
+        fs.createReadStream(sample).pipe(gunzip);
+        csv().from.stream(gunzip).on('record', function (row, index) {
+            if (index === 0) schema = row;
+            else {
+                var value = { id: index };
+                row.forEach(function (item, i) {
+                    value[schema[i]] = item;
                 });
-            }, done);
+                queue.push(value);
+            }
+        }).on('end', function () {
+            queue.push({});
+        });
+    });
+
+
+    it("Has right size", function (done) {
+        coll.count().then(function (count) {
+            assert.equal(count, rowcount);
+            done();
         });
     });
 });
