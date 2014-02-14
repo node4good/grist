@@ -23,9 +23,9 @@
     "async": "",
     "mpromise": "beta",
     "sift": "Empeeric/sift.js.git",
+      "grist": "",
     "git-node": "",
-    "mquery": "",
-    "mosour": ""
+      "mquery": ""
   },
   "scripts": {
     "test": "mocha",
@@ -35,7 +35,6 @@
   "devDependencies": {
     "csv": "",
     "lorem-ipsum": "",
-    "step": "",
     "benchmark": "",
     "mocha": ""
   },
