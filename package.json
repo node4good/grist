@@ -2,17 +2,19 @@
   "author": "Refael Ackermann<refael@empeeric.com>",
   "name": "puny",
   "version": "1.0.5",
-  "description": "Embedded Node.js document store upward compatible with MongoDB",
+    "description": "Embedded document store upward compatible with MongoDB",
+    "repository": "Empeeric/puny",
   "keywords": [
     "database",
     "datastore",
     "embedded",
     "mongodb",
-    "yaml"
+      "git",
+      "json"
   ],
   "main": "lib/index",
   "engines": {
-    "node": ">= 0.11.x"
+      "node": ">= 0.10.x"
   },
   "dependencies": {
     "lodash": "",
@@ -20,7 +22,7 @@
     "safe": "",
     "async": "",
     "mpromise": "beta",
-    "sift": "git+https://github.com/Empeeric/sift.js.git",
+      "sift": "Empeeric/sift.js.git",
     "git-node": "",
     "mquery": "",
     "mosour": ""
