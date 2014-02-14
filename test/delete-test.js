@@ -4,7 +4,7 @@ var safe = require('safe');
 var tutils = require("./utils");
 
 
-var DELETE_TEST_COL_NAME = 'delete-test-' + Date.now();
+var DELETE_TEST_COL_NAME = 'delete-test';
 
 describe('Delete', function () {
     var db, coll, items, length;
@@ -61,8 +61,8 @@ describe('Delete', function () {
         var keys = items.filter(function (x) {
             return x.x;
         }).map(function (x) {
-                return x.k;
-            });
+            return x.k;
+        });
         length -= keys.length;
         coll.remove({ k: { $in: keys } }, { w: 1 }, done);
     });

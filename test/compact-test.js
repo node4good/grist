@@ -7,7 +7,7 @@ var _ = require('lodash');
 var tingodb = require('..');
 
 
-var COMPACT_TEST_COL_NAME = 'Compact-test-' + Date.now();
+var COMPACT_TEST_COL_NAME = 'Compact';
 
 describe('Compact', function () {
     var db, coll, items, length, fsize;
@@ -154,7 +154,7 @@ describe('Compact', function () {
         before(function (done) {
             tutils.getDb('test', true, safe.sure(done, function (_db) {
                 db = _db;
-                db.collection('Update+Hash-test-' + Date.now(), {}, safe.sure(done, function (_coll) {
+                db.collection('Update+Hash', {}, safe.sure(done, function (_coll) {
                     coll = _coll;
                     coll.insert({ k: 1, v: 123 }, { w: 1 }, done);
                 }));
