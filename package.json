@@ -1,49 +1,49 @@
 {
-    "author": "Refael Ackermann<refael@empeeric.com>",
-    "name": "grist",
-    "version": "1.0.9",
-    "description": "Embedded document store upward compatible with MongoDB",
-    "main": "lib/index.js",
-    "repository": "Empeeric/grist",
-    "keywords": [
-        "database",
-        "datastore",
-        "embedded",
-        "mongodb",
-        "human-readable",
-        "git",
-        "json",
-        "grist",
-        "sift",
-        "gnash",
-        "mongoose"
-    ],
-    "dependencies": {
-        "lodash": "",
-        "lodash-contrib": "",
-        "safe": "",
-        "async": "",
-        "mpromise": "beta",
-        "sift": "Empeeric/sift.js.git",
-        "grist-gnash": "",
-        "git-node": "",
-        "mquery": ""
-    },
-    "devDependencies": {
-        "trace": "",
-        "csv": "",
-        "lorem-ipsum": "",
-        "mocha": "",
-        "istanbul": "",
-        "chai": "Empeeric/chai"
-    },
-    "scripts": {
-        "test": "mocha",
-        "cover": "istanbul cover ./node_modules/mocha/bin/_mocha",
-        "postpublish": "git push origin master --tags"
-    },
-    "engines": {
-        "node": ">= 0.10.x"
-    },
-    "license": "MIT"
+  "author": "Refael Ackermann<refael@empeeric.com>",
+  "name": "grist",
+  "version": "1.0.10",
+  "description": "Embedded document store upward compatible with MongoDB",
+  "main": "lib/index.js",
+  "repository": "Empeeric/grist",
+  "keywords": [
+    "database",
+    "datastore",
+    "embedded",
+    "mongodb",
+    "human-readable",
+    "git",
+    "json",
+    "grist",
+    "sift",
+    "gnash",
+    "mongoose"
+  ],
+  "dependencies": {
+    "lodash": "",
+    "lodash-contrib": "",
+    "safe": "",
+    "async": "",
+    "mpromise": "beta",
+    "sift": "Empeeric/sift.js.git",
+    "grist-gnash": "",
+    "git-node": "",
+    "mquery": ""
+  },
+  "devDependencies": {
+    "trace": "",
+    "csv": "",
+    "lorem-ipsum": "",
+    "mocha": "",
+    "istanbul": "",
+    "chai": "Empeeric/chai"
+  },
+  "scripts": {
+    "test": "mocha",
+    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha",
+    "postpublish": "git push origin master --tags"
+  },
+  "engines": {
+    "node": ">= 0.10.x"
+  },
+  "license": "MIT"
 }
