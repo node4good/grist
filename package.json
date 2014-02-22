@@ -10,10 +10,12 @@
         "datastore",
         "embedded",
         "mongodb",
+        "human-readable",
         "git",
         "json",
         "grist",
         "sift",
+        "gnash",
         "mongoose"
     ],
     "dependencies": {
@@ -31,9 +33,9 @@
         "trace": "",
         "csv": "",
         "lorem-ipsum": "",
-        "benchmark": "",
         "mocha": "",
-        "istanbul": ""
+        "istanbul": "",
+        "chai": "Empeeric/chai"
     },
     "scripts": {
         "test": "mocha",

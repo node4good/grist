@@ -18,11 +18,13 @@ function eq(docs1, docs2) {
 describe('Sort Test', function () {
     var db, coll, asc, desc, gt, gtr;
     before(function (done) {
-        this.timeout(10000);
+        this.timeout(3000);
         tutils.getDb('test', true, safe.sure(done, function (_db) {
             db = _db;
-            db.collection("Sort-test", {}, safe.sure(done, function (_coll) {
+            db.collection("Sort-test", {}).then(function (_coll) {
                 coll = _coll;
+                return coll.drop();
+            }).then(function () {
                 var nums = _.times(10000, function () {
                     return _.random(100);
                 });
@@ -45,27 +47,23 @@ describe('Sort Test', function () {
                     return x.num > 25;
                 });
                 gtr = gt.slice().reverse();
-                coll.insert(docs, done);
-            }));
+                return coll.insert(docs, done);
+            });
         }));
     });
 
 
-    after(function (done) {
-        coll.drop(done);
-    });
-
-
-    it("Sort asc index", function (done) {
+    it("Sort asc index", function Sort_asc_index(done) {
         coll.find().sort({ num: 1 }).toArray(safe.sure(done, function (docs) {
             eq(docs, asc);
             done();
         }));
     });
+
     it("Sort with absent/null fields no index", function (done) {
         coll.find().sort({ nul: 1 }).toArray(safe.sure(done, function (docs) {
-            var state = "nulls_start";
-            var prev_value;
+            var state, prev_value;
+            state = "nulls_start";
             _.each(docs, function (doc) {
                 if (state == "nulls_start") {
                     assert(!doc.nul);
@@ -85,8 +83,8 @@ describe('Sort Test', function () {
     });
     it("Sort with absent/null fields with index", function (done) {
         coll.find().sort({ nul: 1 }).toArray(safe.sure(done, function (docs) {
-            var state = "nulls_start";
-            var prev_value;
+            var state, prev_value;
+            state = "nulls_start";
             _.each(docs, function (doc) {
                 if (state == "nulls_start") {
                     assert(!doc.inul);

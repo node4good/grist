@@ -13,16 +13,23 @@ describe('Compact', function () {
     var db, coll, items, length, fsize;
 
     before(function (done) {
-        tutils.getDb('test', true, safe.sure(done, function (_db) {
+        tutils.getDb('test', true, function (err, _db) {
+            expect(err).to.be.null;
             db = _db;
-            db.collection(COMPACT_TEST_COL_NAME, {}, safe.sure(done, function (_coll) {
-                coll = _coll;
-                items = _.times(100, function (n) {
-                    return { k: n, v: _.random(100) };
-                });
-                coll.insert(items, { w: 1 }, done);
-            }));
-        }));
+            db.collection(COMPACT_TEST_COL_NAME, {}).then(
+                function (_coll) {
+                    coll = _coll;
+                    return coll.drop();
+                }
+            ).then(
+                function () {
+                    items = _.times(100, function (n) {
+                        return { k: n, v: _.random(100) };
+                    });
+                    return coll.insert(items, { w: 1 }, done);
+                }
+            ).onResolve(done);
+        });
     });
 
 
@@ -82,7 +89,7 @@ describe('Compact', function () {
     it('Check count', function checkCount(done) {
         coll.find().count(function (err, count) {
             if (err) throw err;
-            assert.equal(count, length);
+            expect(count).to.equal(length);
             done();
         });
     });
@@ -124,7 +131,7 @@ describe('Compact', function () {
     it('Check count after reopening db', function checkCount(done) {
         coll.find().count(function (err, count) {
             if (err) throw err;
-            assert.equal(count, length);
+            expect(count).to.equal(length);
             done();
         });
     });
@@ -152,13 +159,20 @@ describe('Compact', function () {
     describe('Update+Hash', function () {
         var db, coll, fsize;
         before(function (done) {
-            tutils.getDb('test', true, safe.sure(done, function (_db) {
+            tutils.getDb('test', true, function (err, _db) {
+                expect(err).to.be.null;
                 db = _db;
-                db.collection('Update+Hash', {}, safe.sure(done, function (_coll) {
-                    coll = _coll;
-                    coll.insert({ k: 1, v: 123 }, { w: 1 }, done);
-                }));
-            }));
+                db.collection('Update+Hash', {}).then(
+                    function (_coll) {
+                        coll = _coll;
+                        return coll.drop();
+                    }
+                ).then(
+                    function () {
+                        return coll.insert({ k: 1, v: 123 }, { w: 1 });
+                    }
+                ).onResolve(done);
+            });
         });
 
         it('Remember collection size', function (done) {

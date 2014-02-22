@@ -1,7 +1,12 @@
 //require('trace');
+
+global._ = require('lodash-contrib');
+global.expect = require('chai').expect;
+
 var fs = require('fs');
 var path = require('path');
 var DB = require('../');
+
 
 var paths = {};
 
