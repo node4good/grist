@@ -1,9 +1,9 @@
 {
     "author": "Refael Ackermann<refael@empeeric.com>",
-    "name": "puny",
+    "name": "grist",
     "version": "1.0.7",
     "description": "Embedded document store upward compatible with MongoDB",
-    "repository": "Empeeric/puny",
+    "repository": "Empeeric/grist",
     "keywords": [
         "database",
         "datastore",
@@ -23,7 +23,7 @@
         "async": "",
         "mpromise": "beta",
         "sift": "Empeeric/sift.js.git",
-        "grist": "",
+        "grist-gnash": "",
         "git-node": "",
         "mquery": ""
     },
