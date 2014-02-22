@@ -10,9 +10,12 @@
     "embedded",
     "mongodb",
     "git",
-    "json"
+    "json",
+    "grist",
+    "sift",
+    "mongoose"
   ],
-  "main": "lib/index",
+  "main": "lib/index.js",
   "engines": {
     "node": ">= 0.10.x"
   },

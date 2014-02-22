@@ -1,5 +1,8 @@
+*.swp
+.idea
+.npmignore
+.travis.yml
 coverage
 node_modules
 npm-debug.log
-*.swp
-test
+test-data
