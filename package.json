@@ -1,7 +1,7 @@
 {
   "author": "Refael Ackermann<refael@empeeric.com>",
   "name": "grist",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Embedded document store upward compatible with MongoDB",
   "repository": "Empeeric/grist",
   "keywords": [
