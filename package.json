@@ -22,7 +22,7 @@
     "lodash": "",
     "lodash-contrib": "",
     "safe": "",
-    "async": "",
+    "async": "^0.2.0",
     "mpromise": "beta",
     "sift": "Empeeric/sift.js.git",
     "grist-gnash": "",
@@ -30,12 +30,13 @@
     "mquery": ""
   },
   "devDependencies": {
-    "trace": "",
+    "benchmark": "^1.0.0",
+    "chai": "",
     "csv": "",
+    "istanbul": "^0.2.7",
     "lorem-ipsum": "",
     "mocha": "",
-    "istanbul": "",
-    "chai": ""
+    "trace": ""
   },
   "scripts": {
     "test": "mocha",
