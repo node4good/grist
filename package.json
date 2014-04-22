@@ -35,7 +35,7 @@
     "lorem-ipsum": "",
     "mocha": "",
     "istanbul": "",
-    "chai": "Empeeric/chai"
+    "chai": ""
   },
   "scripts": {
     "test": "mocha",
