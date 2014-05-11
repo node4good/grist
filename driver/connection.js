@@ -27,13 +27,11 @@ Connection.prototype.open = function (uri, cb) {
     var self = this;
     cb = _.isFunction(cb) ? cb : _.noop;
 
-    var path = uri.match("puny://(.*)");
+    var path = uri.match("grist://(.*)");
     if (!path)
-        path = uri.split('/').slice(-2);
-    //throw new Error("puny support connection string format 'puny://{/path/to/valid/local/folder'");
+        throw new Error("grist supports connection string format 'grist://{/path/to/valid/local/folder'");
     path = path[1];
-    if (!fs.existsSync('puny')) fs.mkdirSync('puny');
-    path = 'puny/' + path;
+    if (!fs.existsSync(path)) fs.mkdirSync(path);
 
     this.emit("connecting");
 
