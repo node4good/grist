@@ -1,13 +1,14 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="mongoose" type="mocha-javascript-test-runner" factoryName="Mocha" singleton="true">
+    <node-options />
     <working-directory>$3RD_WORK_ROOT$/mongoose</working-directory>
-    <test-directory>$3RD_WORK_ROOT$/mongoose/test</test-directory>
     <pass-parent-env>true</pass-parent-env>
     <envs>
       <env name="MONGOOSE_TEST_URI" value="puny://test-mongoose" />
     </envs>
     <ui>BDD</ui>
-    <require />
+    <extra-mocha-options />
+    <test-directory>$3RD_WORK_ROOT$/mongoose/test</test-directory>
     <recursive>false</recursive>
     <RunnerSettings RunnerId="MochaDebugRunner" />
     <RunnerSettings RunnerId="RunnerForMochaJavaScript" />

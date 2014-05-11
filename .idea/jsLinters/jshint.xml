@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="JSHintConfiguration" version="2.4.3" use-config-file="true" default-config-file-path="$PROJECT_DIR$/.jshintrc">
+  <component name="JSHintConfiguration" version="2.5.0" use-config-file="true" default-config-file-path="$PROJECT_DIR$/.jshintrc">
     <option eqnull="false" />
+    <option funcscope="false" />
+    <option gcl="false" />
     <option nonew="true" />
     <option jquery="false" />
     <option nonstandard="false" />
+    <option noyield="false" />
     <option plusplus="false" />
-    <option funcscope="false" />
     <option validthis="false" />
     <option nomen="false" />
     <option curly="true" />
@@ -63,6 +65,7 @@
     <option mootools="false" />
     <option multistr="false" />
     <option globalstrict="false" />
+    <option nonbsp="false" />
   </component>
 </project>
 
