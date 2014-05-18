@@ -12,7 +12,7 @@ var _dt = null;
 global.CONN_STR_PREFIX = "grist-test-";
 
 describe('FS', function () {
-    describe.only("basic sanity", function () {
+    describe("basic sanity", function () {
         it("can open db", function (done) {
             require.cache = {};
             var conn_str = global.CONN_STR_PREFIX + this.test.parent.title.replace(/\s/g, '');
