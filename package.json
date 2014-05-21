@@ -22,18 +22,18 @@
     "lodash": "",
     "lodash-contrib": "",
     "safe": "",
-    "async": "^0.2.0",
-    "mpromise": "beta",
+      "async": "",
+      "mpromise": "^0.5.4",
     "sift": "Empeeric/sift.js.git",
     "grist-gnash": "",
     "git-node": "",
     "mquery": ""
   },
   "devDependencies": {
-    "benchmark": "^1.0.0",
+      "benchmark": "",
     "chai": "",
     "csv": "",
-    "istanbul": "^0.2.7",
+      "istanbul": "",
     "lorem-ipsum": "",
     "mocha": "",
     "trace": ""
