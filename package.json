@@ -1,7 +1,7 @@
 {
   "author": "Refael Ackermann<refael@empeeric.com>",
   "name": "grist",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Embedded document store upward compatible with MongoDB",
   "main": "lib/index.js",
   "repository": "Empeeric/grist",
@@ -19,16 +19,16 @@
     "mongoose"
   ],
   "dependencies": {
-      "async": "",
-      "git-node": "",
-      "grist-gnash": "",
+    "async": "",
+    "git-node": "",
+    "grist-gnash": "",
     "lodash": "",
     "lodash-contrib": "",
     "mpromise": "^0.5.4",
-      "mquery": "",
-      "rimraf": "^2.2.8",
-      "safe": "",
-      "sift": "Empeeric/sift.js.git"
+    "mquery": "",
+    "rimraf": "^2.2.8",
+    "safe": "",
+    "sift": "Empeeric/sift.js.git"
   },
   "devDependencies": {
     "benchmark": "",
@@ -36,7 +36,7 @@
     "csv": "",
     "istanbul": "",
     "lorem-ipsum": "",
-      "mocha": ""
+    "mocha": ""
   },
   "scripts": {
     "test": "mocha",
@@ -46,30 +46,30 @@
   "engines": {
     "node": ">= 0.10.x"
   },
-    "license": "MIT",
-    "jshintConfig": {
-        "expr": true,
-        "forin": true,
-        "freeze": true,
-        "immed": true,
-        "newcap": true,
-        "noarg": true,
-        "noempty": true,
-        "nonew": true,
-        "undef": true,
-        "trailing": true,
-        "unused": true,
-        "maxdepth": 4,
-        "scripturl": true,
-        "sub": true,
-        "supernew": true,
-        "node": true,
-        "globals": {
-            "describe": true,
-            "before": true,
-            "after": true,
-            "it": true,
-            "expect": true
-        }
+  "license": "MIT",
+  "jshintConfig": {
+    "expr": true,
+    "forin": true,
+    "freeze": true,
+    "immed": true,
+    "newcap": true,
+    "noarg": true,
+    "noempty": true,
+    "nonew": true,
+    "undef": true,
+    "trailing": true,
+    "unused": true,
+    "maxdepth": 4,
+    "scripturl": true,
+    "sub": true,
+    "supernew": true,
+    "node": true,
+    "globals": {
+      "describe": true,
+      "before": true,
+      "after": true,
+      "it": true,
+      "expect": true
     }
+  }
 }
