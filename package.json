@@ -1,7 +1,7 @@
 {
   "author": "Refael Ackermann<refael@empeeric.com>",
   "name": "grist",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Embedded document store upward compatible with MongoDB",
   "main": "lib/index.js",
   "repository": "Empeeric/grist",
