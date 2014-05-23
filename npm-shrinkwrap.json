@@ -1,11 +1,11 @@
 {
     "name": "grist",
-    "version": "1.0.13",
+    "version": "1.0.17",
     "dependencies": {
         "async": {
-            "version": "0.2.10",
-            "from": "async@0.2.10",
-            "resolved": "https://registry.npmjs.org/async/-/async-0.2.10.tgz"
+            "version": "0.9.0",
+            "from": "async@0.9.0",
+            "resolved": "http://registry.npmjs.org/async/-/async-0.9.0.tgz"
         },
         "git-node": {
             "version": "0.1.1",
@@ -106,29 +106,35 @@
         },
         "mpromise": {
             "version": "0.5.4",
-            "from": "mpromise@0.5.4"
+            "from": "mpromise@0.5.4",
+            "resolved": "http://registry.npmjs.org/mpromise/-/mpromise-0.5.4.tgz"
         },
         "mquery": {
             "version": "0.8.0",
-            "from": "mquery@0.8.0",
+            "from": "http://registry.npmjs.org/mquery/-/mquery-0.8.0.tgz",
             "resolved": "http://registry.npmjs.org/mquery/-/mquery-0.8.0.tgz",
             "dependencies": {
                 "sliced": {
                     "version": "0.0.5",
-                    "from": "sliced@0.0.5",
+                    "from": "http://registry.npmjs.org/sliced/-/sliced-0.0.5.tgz",
                     "resolved": "http://registry.npmjs.org/sliced/-/sliced-0.0.5.tgz"
                 },
                 "debug": {
                     "version": "0.7.4",
-                    "from": "debug@0.7.4",
+                    "from": "http://registry.npmjs.org/debug/-/debug-0.7.4.tgz",
                     "resolved": "http://registry.npmjs.org/debug/-/debug-0.7.4.tgz"
                 },
                 "regexp-clone": {
                     "version": "0.0.1",
-                    "from": "regexp-clone@0.0.1",
+                    "from": "http://registry.npmjs.org/regexp-clone/-/regexp-clone-0.0.1.tgz",
                     "resolved": "http://registry.npmjs.org/regexp-clone/-/regexp-clone-0.0.1.tgz"
                 }
             }
+        },
+        "rimraf": {
+            "version": "2.2.8",
+            "from": "rimraf@",
+            "resolved": "http://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz"
         },
         "safe": {
             "version": "0.1.4",
@@ -136,7 +142,7 @@
         },
         "sift": {
             "version": "0.0.12",
-            "from": "git://github.com/Empeeric/sift.js.git",
+            "from": "sift@git://github.com/Empeeric/sift.js.git#40a480d277ed320985bd20c65627748d8719db7d",
             "resolved": "git://github.com/Empeeric/sift.js.git#40a480d277ed320985bd20c65627748d8719db7d"
         }
     }

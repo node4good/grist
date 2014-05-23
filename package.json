@@ -19,15 +19,16 @@
     "mongoose"
   ],
   "dependencies": {
+      "async": "",
+      "git-node": "",
+      "grist-gnash": "",
     "lodash": "",
     "lodash-contrib": "",
-    "safe": "",
-    "async": "",
     "mpromise": "^0.5.4",
-    "sift": "Empeeric/sift.js.git",
-    "grist-gnash": "",
-    "git-node": "",
-    "mquery": ""
+      "mquery": "",
+      "rimraf": "^2.2.8",
+      "safe": "",
+      "sift": "Empeeric/sift.js.git"
   },
   "devDependencies": {
     "benchmark": "",
@@ -35,8 +36,7 @@
     "csv": "",
     "istanbul": "",
     "lorem-ipsum": "",
-    "mocha": "",
-    "trace": ""
+      "mocha": ""
   },
   "scripts": {
     "test": "mocha",
@@ -46,5 +46,30 @@
   "engines": {
     "node": ">= 0.10.x"
   },
-  "license": "MIT"
+    "license": "MIT",
+    "jshintConfig": {
+        "expr": true,
+        "forin": true,
+        "freeze": true,
+        "immed": true,
+        "newcap": true,
+        "noarg": true,
+        "noempty": true,
+        "nonew": true,
+        "undef": true,
+        "trailing": true,
+        "unused": true,
+        "maxdepth": 4,
+        "scripturl": true,
+        "sub": true,
+        "supernew": true,
+        "node": true,
+        "globals": {
+            "describe": true,
+            "before": true,
+            "after": true,
+            "it": true,
+            "expect": true
+        }
+    }
 }
