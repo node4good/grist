@@ -1,149 +1,149 @@
 {
-    "name": "grist",
-    "version": "1.0.17",
-    "dependencies": {
-        "async": {
-            "version": "0.9.0",
-            "from": "async@0.9.0",
-            "resolved": "http://registry.npmjs.org/async/-/async-0.9.0.tgz"
+  "name": "grist",
+  "version": "1.0.20",
+  "dependencies": {
+    "async": {
+      "version": "0.9.0",
+      "from": "async@latest",
+      "resolved": "http://registry.npmjs.org/async/-/async-0.9.0.tgz"
+    },
+    "git-node": {
+      "version": "0.1.1",
+      "from": "git-node@",
+      "resolved": "http://registry.npmjs.org/git-node/-/git-node-0.1.1.tgz",
+      "dependencies": {
+        "git-fs-db": {
+          "version": "0.2.0",
+          "from": "git-fs-db@0.2.0"
         },
-        "git-node": {
-            "version": "0.1.1",
-            "from": "git-node@",
-            "resolved": "http://registry.npmjs.org/git-node/-/git-node-0.1.1.tgz",
-            "dependencies": {
-                "git-fs-db": {
-                    "version": "0.2.0",
-                    "from": "git-fs-db@0.2.0"
-                },
-                "git-net": {
-                    "version": "0.0.4",
-                    "from": "git-net@~0.0.3",
-                    "dependencies": {
-                        "push-to-pull": {
-                            "version": "0.1.0",
-                            "from": "push-to-pull@~0.1.0"
-                        }
-                    }
-                },
-                "git-node-platform": {
-                    "version": "0.1.4",
-                    "from": "git-node-platform@~0.1.4",
-                    "dependencies": {
-                        "ssh2": {
-                            "version": "0.2.23",
-                            "from": "ssh2@0.2.23",
-                            "resolved": "http://registry.npmjs.org/ssh2/-/ssh2-0.2.23.tgz",
-                            "dependencies": {
-                                "streamsearch": {
-                                    "version": "0.1.2",
-                                    "from": "streamsearch@0.1.2",
-                                    "resolved": "http://registry.npmjs.org/streamsearch/-/streamsearch-0.1.2.tgz"
-                                },
-                                "asn1": {
-                                    "version": "0.1.11",
-                                    "from": "asn1@0.1.11",
-                                    "resolved": "https://registry.npmjs.org/asn1/-/asn1-0.1.11.tgz"
-                                }
-                            }
-                        }
-                    }
-                },
-                "js-git": {
-                    "version": "0.5.4",
-                    "from": "js-git@0.5.4",
-                    "dependencies": {
-                        "push-to-pull": {
-                            "version": "0.1.0",
-                            "from": "push-to-pull@~0.1.0"
-                        },
-                        "git-pack-codec": {
-                            "version": "0.0.1",
-                            "from": "git-pack-codec@~0.0.1",
-                            "dependencies": {
-                                "varint": {
-                                    "version": "0.0.3",
-                                    "from": "varint@0.0.3",
-                                    "resolved": "http://registry.npmjs.org/varint/-/varint-0.0.3.tgz"
-                                }
-                            }
-                        }
-                    }
-                }
+        "git-net": {
+          "version": "0.0.4",
+          "from": "git-net@~0.0.3",
+          "dependencies": {
+            "push-to-pull": {
+              "version": "0.1.0",
+              "from": "push-to-pull@~0.1.0"
             }
+          }
         },
-        "grist-gnash": {
-            "version": "1.0.3",
-            "from": "grist-gnash@",
-            "dependencies": {
-                "sift": {
-                    "version": "0.0.16",
-                    "from": "sift@0.0.16",
-                    "resolved": "http://registry.npmjs.org/sift/-/sift-0.0.16.tgz"
+        "git-node-platform": {
+          "version": "0.1.4",
+          "from": "git-node-platform@~0.1.4",
+          "dependencies": {
+            "ssh2": {
+              "version": "0.2.23",
+              "from": "ssh2@0.2.23",
+              "resolved": "http://registry.npmjs.org/ssh2/-/ssh2-0.2.23.tgz",
+              "dependencies": {
+                "streamsearch": {
+                  "version": "0.1.2",
+                  "from": "streamsearch@0.1.2",
+                  "resolved": "http://registry.npmjs.org/streamsearch/-/streamsearch-0.1.2.tgz"
                 },
-                "lodash-contrib": {
-                    "version": "241.4.5",
-                    "from": "lodash-contrib@241.4.5",
-                    "resolved": "http://registry.npmjs.org/lodash-contrib/-/lodash-contrib-241.4.5.tgz",
-                    "dependencies": {
-                        "lodash": {
-                            "version": "2.4.1",
-                            "from": "lodash@2.4.1",
-                            "resolved": "http://registry.npmjs.org/lodash/-/lodash-2.4.1.tgz"
-                        }
-                    }
+                "asn1": {
+                  "version": "0.1.11",
+                  "from": "asn1@0.1.11",
+                  "resolved": "https://registry.npmjs.org/asn1/-/asn1-0.1.11.tgz"
                 }
+              }
             }
+          }
         },
-        "lodash": {
-            "version": "2.4.1",
-            "from": "lodash@"
+        "js-git": {
+          "version": "0.5.4",
+          "from": "js-git@0.5.4",
+          "dependencies": {
+            "push-to-pull": {
+              "version": "0.1.0",
+              "from": "push-to-pull@~0.1.0"
+            },
+            "git-pack-codec": {
+              "version": "0.0.1",
+              "from": "git-pack-codec@~0.0.1",
+              "dependencies": {
+                "varint": {
+                  "version": "0.0.3",
+                  "from": "varint@0.0.3",
+                  "resolved": "http://registry.npmjs.org/varint/-/varint-0.0.3.tgz"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "grist-gnash": {
+      "version": "1.0.3",
+      "from": "grist-gnash@",
+      "dependencies": {
+        "sift": {
+          "version": "0.0.17",
+          "from": "sift@0.0.17",
+          "resolved": "http://github.com/crcn/sift.js/archive/master.tar.gz"
         },
         "lodash-contrib": {
-            "version": "241.4.5",
-            "from": "lodash-contrib@241.4.5",
-            "resolved": "http://registry.npmjs.org/lodash-contrib/-/lodash-contrib-241.4.5.tgz"
-        },
-        "mpromise": {
-            "version": "0.5.4",
-            "from": "mpromise@0.5.4",
-            "resolved": "http://registry.npmjs.org/mpromise/-/mpromise-0.5.4.tgz"
-        },
-        "mquery": {
-            "version": "0.8.0",
-            "from": "http://registry.npmjs.org/mquery/-/mquery-0.8.0.tgz",
-            "resolved": "http://registry.npmjs.org/mquery/-/mquery-0.8.0.tgz",
-            "dependencies": {
-                "sliced": {
-                    "version": "0.0.5",
-                    "from": "http://registry.npmjs.org/sliced/-/sliced-0.0.5.tgz",
-                    "resolved": "http://registry.npmjs.org/sliced/-/sliced-0.0.5.tgz"
-                },
-                "debug": {
-                    "version": "0.7.4",
-                    "from": "http://registry.npmjs.org/debug/-/debug-0.7.4.tgz",
-                    "resolved": "http://registry.npmjs.org/debug/-/debug-0.7.4.tgz"
-                },
-                "regexp-clone": {
-                    "version": "0.0.1",
-                    "from": "http://registry.npmjs.org/regexp-clone/-/regexp-clone-0.0.1.tgz",
-                    "resolved": "http://registry.npmjs.org/regexp-clone/-/regexp-clone-0.0.1.tgz"
-                }
+          "version": "241.4.5",
+          "from": "lodash-contrib@241.4.5",
+          "resolved": "http://registry.npmjs.org/lodash-contrib/-/lodash-contrib-241.4.5.tgz",
+          "dependencies": {
+            "lodash": {
+              "version": "2.4.1",
+              "from": "lodash@2.4.1",
+              "resolved": "http://registry.npmjs.org/lodash/-/lodash-2.4.1.tgz"
             }
-        },
-        "rimraf": {
-            "version": "2.2.8",
-            "from": "rimraf@",
-            "resolved": "http://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz"
-        },
-        "safe": {
-            "version": "0.1.4",
-            "from": "safe@"
-        },
-        "sift": {
-            "version": "0.0.12",
-            "from": "sift@git://github.com/Empeeric/sift.js.git#40a480d277ed320985bd20c65627748d8719db7d",
-            "resolved": "git://github.com/Empeeric/sift.js.git#40a480d277ed320985bd20c65627748d8719db7d"
+          }
         }
+      }
+    },
+    "lodash": {
+      "version": "2.4.1",
+      "from": "lodash@"
+    },
+    "lodash-contrib": {
+      "version": "241.4.5",
+      "from": "lodash-contrib@241.4.5",
+      "resolved": "http://registry.npmjs.org/lodash-contrib/-/lodash-contrib-241.4.5.tgz"
+    },
+    "mpromise": {
+      "version": "0.5.4",
+      "from": "mpromise@0.5.4",
+      "resolved": "http://registry.npmjs.org/mpromise/-/mpromise-0.5.4.tgz"
+    },
+    "mquery": {
+      "version": "0.8.0",
+      "from": "http://registry.npmjs.org/mquery/-/mquery-0.8.0.tgz",
+      "resolved": "http://registry.npmjs.org/mquery/-/mquery-0.8.0.tgz",
+      "dependencies": {
+        "sliced": {
+          "version": "0.0.5",
+          "from": "http://registry.npmjs.org/sliced/-/sliced-0.0.5.tgz",
+          "resolved": "http://registry.npmjs.org/sliced/-/sliced-0.0.5.tgz"
+        },
+        "debug": {
+          "version": "0.7.4",
+          "from": "http://registry.npmjs.org/debug/-/debug-0.7.4.tgz",
+          "resolved": "http://registry.npmjs.org/debug/-/debug-0.7.4.tgz"
+        },
+        "regexp-clone": {
+          "version": "0.0.1",
+          "from": "http://registry.npmjs.org/regexp-clone/-/regexp-clone-0.0.1.tgz",
+          "resolved": "http://registry.npmjs.org/regexp-clone/-/regexp-clone-0.0.1.tgz"
+        }
+      }
+    },
+    "rimraf": {
+      "version": "2.2.8",
+      "from": "rimraf@",
+      "resolved": "http://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz"
+    },
+    "safe": {
+      "version": "0.1.4",
+      "from": "safe@"
+    },
+    "sift": {
+      "version": "0.0.17",
+      "from": "sift@0.0.17",
+      "resolved": "http://github.com/crcn/sift.js/archive/master.tar.gz"
     }
+  }
 }
