@@ -3,7 +3,7 @@ var async = require('async');
 var fs = require('fs');
 var safe = require('safe');
 var tutils = require('./utils');
-var _ = require('lodash');
+var _ = require('lodash-contrib');
 var tingodb = require('..');
 
 

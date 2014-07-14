@@ -1,4 +1,4 @@
-var _ = require('lodash');
+var _ = require('lodash-contrib');
 var fs = require('fs');
 
 var filename = process.argv[2];

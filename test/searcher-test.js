@@ -1,6 +1,6 @@
 /*global it */
 var assert = require('assert');
-var _ = require('lodash');
+var _ = require('lodash-contrib');
 var safe = require('safe');
 var tutils = require("./utils");
 var lipsum = require('lorem-ipsum');

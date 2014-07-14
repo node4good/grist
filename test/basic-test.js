@@ -1,7 +1,7 @@
 "use strict";
 /*global it,describe */
 var assert = require('assert');
-var _ = require('lodash');
+var _ = require('lodash-contrib');
 var safe = require('safe');
 
 var loremIpsum = require('lorem-ipsum');

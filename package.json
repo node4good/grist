@@ -22,13 +22,12 @@
     "async": "",
     "git-node": "",
     "grist-gnash": "",
-    "lodash": "",
     "lodash-contrib": "",
     "mpromise": "^0.5.4",
     "mquery": "",
     "rimraf": "^2.2.8",
     "safe": "",
-    "sift": "Empeeric/sift.js.git"
+      "sift": "^0.0.17"
   },
   "devDependencies": {
     "benchmark": "",

@@ -1,4 +1,4 @@
-var _ = require('lodash');
+var _ = require('lodash-contrib');
 var Collection = require('../lib/Collection-base');
 var util = require('util');
 

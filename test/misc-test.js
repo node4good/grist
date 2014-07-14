@@ -1,6 +1,6 @@
 'use strict';
 /*global describe */
-var _ = require('lodash');
+var _ = require('lodash-contrib');
 var assert = require('assert');
 var tutils = require("./utils");
 var Promise = require('mpromise');

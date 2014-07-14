@@ -1,6 +1,6 @@
 "use strict";
 /*global it,describe */
-var _ = require('lodash');
+var _ = require('lodash-contrib');
 var assert = require('chai');
 expect = assert.expect;
 var loremIpsum = require('lorem-ipsum');

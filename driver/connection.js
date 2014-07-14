@@ -1,7 +1,7 @@
 var fs = require('fs'),
     util = require('util'),
     EventEmitter = require('events').EventEmitter,
-    _ = require('lodash'),
+    _ = require('lodash-contrib'),
     safe = require('safe'),
     PotusCollection = require('./collection.js'),
     Db = require('./');
