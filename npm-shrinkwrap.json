@@ -1,6 +1,6 @@
 {
   "name": "grist",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "dependencies": {
     "async": {
       "version": "0.9.0",
@@ -98,9 +98,9 @@
       "resolved": "https://registry.npmjs.org/lodash-contrib/-/lodash-contrib-241.4.14.tgz"
     },
     "mpromise": {
-      "version": "0.5.1",
-      "from": "mpromise@0.5.1",
-      "resolved": "http://registry.npmjs.org/mpromise/-/mpromise-0.5.1.tgz"
+      "version": "0.5.4",
+      "from": "mpromise@beta",
+      "resolved": "http://registry.npmjs.org/mpromise/-/mpromise-0.5.4.tgz"
     },
     "mquery": {
       "version": "1.0.0",
