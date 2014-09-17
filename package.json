@@ -2,6 +2,7 @@
   "author": "Refael Ackermann<refael@empeeric.com>",
   "dependencies": {
     "async": "",
+      "buffalo": "^0.1.3",
     "git-node": "",
     "grist-gnash": "",
     "lodash-contrib": "",
