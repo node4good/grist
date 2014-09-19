@@ -1,20 +1,9 @@
 <component name="ProjectDictionaryState">
-  <dictionary name="Refael">
+  <dictionary name="refael">
     <words>
-      <w>asers</w>
-      <w>blogposts</w>
-      <w>endian</w>
-      <w>ipsum</w>
-      <w>lipsum</w>
-      <w>lorem</w>
-      <w>potus</w>
-      <w>purgedirectories</w>
-      <w>resave</w>
-      <w>rimraf</w>
-      <w>tutils</w>
-      <w>udocs</w>
-      <w>upserted</w>
-      <w>zlib</w>
+      <w>bson</w>
+      <w>jsons</w>
+      <w>keypath</w>
     </words>
   </dictionary>
 </component>
