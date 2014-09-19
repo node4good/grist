@@ -7,7 +7,7 @@ var tutils = require("./utils");
 describe('BSON Parsing', function () {
     before(function (done) {
         var test = this;
-        tutils.getDb('bson-test', true, function (err, _db) {
+        tutils.getDb('test', true, function (err, _db) {
             test._db = _db;
             _db.dropDatabase(done);
         });
@@ -16,7 +16,7 @@ describe('BSON Parsing', function () {
 
     it("Read Dir", function (done) {
         this.timeout(10 * 1000);
-        var fixtureDir = path.join(__dirname, '..', 'test-data', 'bson');
+        var fixtureDir = path.join(__dirname, 'sample-data');
         BSONUtils.BSONDirectoryConvert(fixtureDir, this._db, done);
     });
 });

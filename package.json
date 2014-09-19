@@ -4,10 +4,12 @@
     "async": "",
       "buffalo": "latest",
       "chanel": "latest",
-    "git-node": "",
+      "git-net": "latest",
+      "git-node-fs": "latest",
     "grist-gnash": "",
+      "js-git": "^0.7.7",
     "lodash-contrib": "",
-    "mpromise": "beta",
+      "mpromise": "latest",
     "mquery": "",
     "rimraf": "latest",
     "safe": "",
@@ -17,7 +19,7 @@
   "devDependencies": {
     "benchmark": "",
     "chai": "",
-    "csv": "",
+      "csv": "^0.4.0",
     "istanbul": "",
     "lorem-ipsum": "",
     "mocha": ""
@@ -65,9 +67,9 @@
   "license": "MIT",
   "main": "lib/index.js",
   "name": "grist",
-  "repository": "Empeeric/grist",
+    "repository": "TheNodeILs/grist",
   "scripts": {
-    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha",
+      "cover": "istanbul cover node_modules/mocha/bin/_mocha",
     "postpublish": "git push origin master --tags",
     "test": "mocha"
   },
