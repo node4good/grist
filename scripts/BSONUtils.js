@@ -49,6 +49,7 @@ function bsonDirectoryConvert(direcotry, db, done) {
         chanel.push(p);
     });
     chanel(done);
+    return db;
 }
 
 
