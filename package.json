@@ -2,14 +2,14 @@
   "author": "Refael Ackermann<refael@empeeric.com>",
   "dependencies": {
     "async": "",
-      "buffalo": "latest",
-      "chanel": "latest",
-      "git-net": "latest",
-      "git-node-fs": "latest",
+    "buffalo": "latest",
+    "chanel": "latest",
+    "git-net": "latest",
+    "git-node-fs": "latest",
     "grist-gnash": "",
-      "js-git": "^0.7.7",
+    "js-git": "^0.7.7",
     "lodash-contrib": "",
-      "mpromise": "latest",
+    "mpromise": "latest",
     "mquery": "",
     "rimraf": "latest",
     "safe": "",
@@ -19,7 +19,7 @@
   "devDependencies": {
     "benchmark": "",
     "chai": "",
-      "csv": "^0.4.0",
+    "csv": "^0.4.0",
     "istanbul": "",
     "lorem-ipsum": "",
     "mocha": ""
@@ -65,13 +65,13 @@
     "mongoose"
   ],
   "license": "MIT",
-    "main": "lib/Grist.js",
+  "main": "lib/Grist.js",
   "name": "grist",
-    "repository": "TheNodeILs/grist",
+  "repository": "TheNodeILs/grist",
   "scripts": {
-      "cover": "istanbul cover node_modules/mocha/bin/_mocha",
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha",
     "postpublish": "git push origin master --tags",
     "test": "mocha"
   },
-  "version": "1.0.22"
+  "version": "1.1.0"
 }
