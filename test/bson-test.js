@@ -19,4 +19,11 @@ describe('BSON Parsing', function () {
         var fixtureDir = path.join(__dirname, 'sample-data');
         BSONUtils.BSONDirectoryConvert(fixtureDir, this._db, done);
     });
+
+
+    it("Read Dir to new DB", function (done) {
+        this.timeout(10 * 1000);
+        var fixtureDir = path.join(__dirname, 'sample-data');
+        BSONUtils.BSONDirectoryConvert(fixtureDir, "dump-restore", done);
+    });
 });
