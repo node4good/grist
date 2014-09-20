@@ -14,7 +14,7 @@ function bsonFileConvert(filename) {
     while (buf.__off < buf.length) {
         var obj = buffalo.parse(buf, buf.__off);
         buf.__off += obj.__length;
-        if (obj._id) obj._id = ObjectId.createFromHexString(String(obj._id));
+        obj._id = new ObjectId(obj._id);
         objs.push(obj);
     }
     return objs;
