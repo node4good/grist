@@ -1,4 +1,4 @@
 module.
-exports = require('../lib/ObjectId');
+    exports = require('../lib/json/ObjectId');
 
 

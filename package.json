@@ -65,7 +65,7 @@
     "mongoose"
   ],
   "license": "MIT",
-  "main": "lib/index.js",
+    "main": "lib/Grist.js",
   "name": "grist",
     "repository": "TheNodeILs/grist",
   "scripts": {

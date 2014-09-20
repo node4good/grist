@@ -4,8 +4,8 @@ var fs = require('fs');
 var path = require('path');
 var Chanel = require('chanel');
 var buffalo = require('buffalo');
-var DB = require('../lib');
-var ObjectId = require('../lib/ObjectId');
+var DB = require('..');
+var ObjectId = require('../lib/json/ObjectId');
 
 function bsonFileConvert(filename) {
     var buf = fs.readFileSync(filename);
