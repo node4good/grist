@@ -1,6 +1,8 @@
 var _ = require('lodash-contrib');
 var Collection = require('../lib/Collection');
+var MPromise = require('mpromise');
 var util = require('util');
+
 
 function PotusCollection(name, conn, opts) {
     if (undefined === opts) opts = {};
@@ -36,6 +38,10 @@ PotusCollection.prototype.onOpen = function () {
             self.buffer = false;
         });
     });
+};
+
+PotusCollection.prototype.ensureIndex = function (__, ___, cb) {
+    return MPromise.fulfilled().onResolve(cb);
 };
 
 /**
