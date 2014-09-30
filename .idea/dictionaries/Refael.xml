@@ -4,6 +4,7 @@
       <w>bson</w>
       <w>jsons</w>
       <w>keypath</w>
+      <w>mongod</w>
     </words>
   </dictionary>
 </component>

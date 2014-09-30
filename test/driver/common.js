@@ -1,19 +1,17 @@
-global.MONGOOSE_DRIVER_PATH = __dirname + "/../driver";
-process.env.MONGOOSE_TEST_URI = 'tingodb://' + __dirname + "/data";
+"use strict";
+global.MONGOOSE_DRIVER_PATH = __dirname + "/../../driver";
+process.env.MONGOOSE_TEST_URI = 'grist://' + __dirname + "/data";
 
 
 /**
  * Module dependencies.
  */
 
-var mongoose = require('mongoose')
-    , Mongoose = mongoose.Mongoose
-    , Collection = mongoose.Collection
-    , assert = require('assert')
-    , startTime = Date.now()
-    , queryCount = 0
-    , opened = 0
-    , closed = 0;
+var mongoose = require('mongoose'),
+    Collection = mongoose.Collection,
+    assert = require('assert');
+
+var queryCount = 0, opened = 0, closed = 0;
 
 if (process.env.D === '1')
     mongoose.set('debug', true);
@@ -22,18 +20,7 @@ if (process.env.D === '1')
  * Override all Collection related queries to keep count
  */
 
-[   'ensureIndex'
-    , 'findAndModify'
-    , 'findOne'
-    , 'find'
-    , 'insert'
-    , 'save'
-    , 'update'
-    , 'remove'
-    , 'count'
-    , 'distinct'
-    , 'isCapped'
-    , 'options'
+['ensureIndex', 'findAndModify', 'findOne', 'find', 'insert', 'save', 'update', 'remove', 'count', 'distinct', 'isCapped', 'options'
 ].forEach(function (method) {
 
         var oldMethod = Collection.prototype[method];
@@ -75,7 +62,7 @@ Collection.prototype.onClose = function () {
  */
 
 module.exports = function (options) {
-    options || (options = {});
+    options = options || {};
     var uri;
 
     if (options.uri) {
@@ -103,13 +90,17 @@ module.exports = function (options) {
  * testing uri
  */
 
-module.exports.uri = process.env.MONGOOSE_TEST_URI || 'tingodb://' + __dirname + "/data";
+module.exports.uri = process.env.MONGOOSE_TEST_URI;
 
 /**
  * expose mongoose
  */
 
 module.exports.mongoose = mongoose;
+module.exports.getMongoose = function () {
+    mongoose.connect(module.exports.uri);
+    return mongoose;
+};
 
 /**
  * expose mongod version helper
@@ -126,10 +117,10 @@ module.exports.mongodVersion = function (cb) {
             admin.serverStatus(function (err, info) {
                 if (err) return cb(err);
                 var version = info.version.split('.').map(function (n) {
-                    return parseInt(n, 10)
+                    return parseInt(n, 10);
                 });
                 cb(null, version);
             });
         });
-    })
-}
+    });
+};

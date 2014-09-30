@@ -1,18 +1,18 @@
 var _ = require('lodash-contrib');
-var Collection = require('../lib/Collection-base');
+var Collection = require('../lib/Collection');
 var util = require('util');
 
 function PotusCollection(name, conn, opts) {
-    Collection.apply(this, arguments);
-
     if (undefined === opts) opts = {};
     if (undefined === opts.capped) opts.capped = {};
 
     opts.bufferCommands = undefined === opts.bufferCommands ? true : opts.bufferCommands;
 
     if ('number' == typeof opts.capped) {
-        opts.capped = { size: opts.capped };
+        opts.capped = {size: opts.capped};
     }
+
+    Collection.apply(this, [conn.db, name]);
 
     this.opts = opts;
     this.name = name;
@@ -29,15 +29,12 @@ util.inherits(PotusCollection, Collection);
 
 PotusCollection.prototype.onOpen = function () {
     var self = this;
-    this.init(self.conn.db, self.name);
-    return self.conn.db.collection(self.name, function callback(err, collection) {
-        if (err) {
-            // likely a strict mode error
-            self.conn.emit('error', err);
-        } else {
+    return this.init().then(function () {
+        return self.conn.db.collection(self.name, function callback(err, collection) {
+            if (err) throw err;
             self.collection = collection;
             self.buffer = false;
-        }
+        });
     });
 };
 

@@ -1,7 +1,7 @@
-var start = require('./common')
-    , mongoose = start.mongoose
-    , assert = require('assert')
-    , Collection = require('../lib/collection');
+var start = require('./common'),
+    mongoose = start.mongoose,
+    assert = require('assert'),
+    Collection = require('../../lib/Collection');
 
 describe('collections:', function () {
     it('should buffer commands until connection is established', function (done) {

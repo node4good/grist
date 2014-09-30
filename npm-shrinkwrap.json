@@ -1,127 +1,132 @@
 {
   "name": "grist",
-    "version": "1.0.22",
+  "version": "1.1.0",
   "dependencies": {
     "async": {
       "version": "0.9.0",
-        "from": "async@*",
-        "resolved": "https://registry.npmjs.org/async/-/async-0.9.0.tgz"
+      "from": "async@*",
+      "resolved": "https://registry.npmjs.org/async/-/async-0.9.0.tgz"
     },
-      "buffalo": {
-          "version": "0.1.3",
-          "from": "buffalo@latest",
-          "resolved": "https://registry.npmjs.org/buffalo/-/buffalo-0.1.3.tgz",
+    "buffalo": {
+      "version": "0.1.3",
+      "from": "buffalo@latest",
+      "resolved": "https://registry.npmjs.org/buffalo/-/buffalo-0.1.3.tgz",
       "dependencies": {
-          "tosource": {
-              "version": "0.1.1",
-              "from": "tosource@0.1.1",
-              "resolved": "https://registry.npmjs.org/tosource/-/tosource-0.1.1.tgz"
-          }
-      }
-      },
-      "chanel": {
-          "version": "2.2.0",
-          "from": "chanel@latest",
-          "resolved": "http://registry.npmjs.org/chanel/-/chanel-2.2.0.tgz",
-          "dependencies": {
-              "co": {
-                  "version": "3.1.0",
-                  "from": "co@*",
-                  "resolved": "https://registry.npmjs.org/co/-/co-3.1.0.tgz"
-        },
-              "generator-supported": {
-                  "version": "0.0.1",
-                  "from": "generator-supported@*",
-                  "resolved": "http://registry.npmjs.org/generator-supported/-/generator-supported-0.0.1.tgz"
-        },
-              "to-descriptor": {
-                  "version": "1.0.1",
-                  "from": "to-descriptor@*",
-                  "resolved": "http://registry.npmjs.org/to-descriptor/-/to-descriptor-1.0.1.tgz"
+        "tosource": {
+          "version": "0.1.1",
+          "from": "tosource@0.1.1",
+          "resolved": "https://registry.npmjs.org/tosource/-/tosource-0.1.1.tgz"
         }
       }
     },
-      "git-net": {
-          "version": "0.0.4",
-          "from": "git-net@*",
-          "resolved": "https://registry.npmjs.org/git-net/-/git-net-0.0.4.tgz",
-          "dependencies": {
-              "push-to-pull": {
-                  "version": "0.1.0",
-                  "from": "push-to-pull@>=0.1.0-0 <0.2.0-0",
-                  "resolved": "https://registry.npmjs.org/push-to-pull/-/push-to-pull-0.1.0.tgz"
-              }
-          }
-      },
-      "git-node-fs": {
-          "version": "1.0.0",
-          "from": "git-node-fs@latest",
-          "resolved": "https://registry.npmjs.org/git-node-fs/-/git-node-fs-1.0.0.tgz"
-      },
+    "chanel": {
+      "version": "2.2.0",
+      "from": "chanel@latest",
+      "resolved": "http://registry.npmjs.org/chanel/-/chanel-2.2.0.tgz",
+      "dependencies": {
+        "co": {
+          "version": "3.1.0",
+          "from": "co@*",
+          "resolved": "https://registry.npmjs.org/co/-/co-3.1.0.tgz"
+        },
+        "generator-supported": {
+          "version": "0.0.1",
+          "from": "generator-supported@*",
+          "resolved": "http://registry.npmjs.org/generator-supported/-/generator-supported-0.0.1.tgz"
+        },
+        "to-descriptor": {
+          "version": "1.0.1",
+          "from": "to-descriptor@*",
+          "resolved": "http://registry.npmjs.org/to-descriptor/-/to-descriptor-1.0.1.tgz"
+        }
+      }
+    },
+    "git-net": {
+      "version": "0.0.4",
+      "from": "git-net@*",
+      "resolved": "https://registry.npmjs.org/git-net/-/git-net-0.0.4.tgz",
+      "dependencies": {
+        "push-to-pull": {
+          "version": "0.1.0",
+          "from": "push-to-pull@>=0.1.0-0 <0.2.0-0",
+          "resolved": "https://registry.npmjs.org/push-to-pull/-/push-to-pull-0.1.0.tgz"
+        }
+      }
+    },
+    "git-node-fs": {
+      "version": "1.0.0",
+      "from": "git-node-fs@latest",
+      "resolved": "https://registry.npmjs.org/git-node-fs/-/git-node-fs-1.0.0.tgz"
+    },
     "grist-gnash": {
       "version": "1.0.3",
-        "from": "grist-gnash@*",
+      "from": "grist-gnash@*",
       "resolved": "https://registry.npmjs.org/grist-gnash/-/grist-gnash-1.0.3.tgz",
       "dependencies": {
-          "lodash": {
-              "version": "2.4.1",
-              "from": "lodash@*",
-              "resolved": "https://registry.npmjs.org/lodash/-/lodash-2.4.1.tgz"
+        "sift": {
+          "version": "0.1.0",
+          "from": "sift@0.1.0",
+          "resolved": "https://registry.npmjs.org/sift/-/sift-0.1.0.tgz"
+        },
+        "lodash": {
+          "version": "2.4.1",
+          "from": "lodash@*",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-2.4.1.tgz"
         }
       }
     },
-      "js-git": {
-          "version": "0.7.7",
-          "from": "js-git@*",
-          "resolved": "https://registry.npmjs.org/js-git/-/js-git-0.7.7.tgz",
-          "dependencies": {
-              "bodec": {
-                  "version": "0.1.0",
-                  "from": "bodec@0.1.0",
-                  "resolved": "https://registry.npmjs.org/bodec/-/bodec-0.1.0.tgz"
-              },
-              "culvert": {
-                  "version": "0.1.2",
-                  "from": "culvert@0.1.2",
-                  "resolved": "https://registry.npmjs.org/culvert/-/culvert-0.1.2.tgz"
-              },
-              "git-sha1": {
-                  "version": "0.1.2",
-                  "from": "git-sha1@0.1.2",
-                  "resolved": "https://registry.npmjs.org/git-sha1/-/git-sha1-0.1.2.tgz"
-              },
-              "pako": {
-                  "version": "0.2.5",
-                  "from": "pako@0.2.5",
-                  "resolved": "https://registry.npmjs.org/pako/-/pako-0.2.5.tgz"
-              }
-          }
+    "js-git": {
+      "version": "0.7.7",
+      "from": "js-git@*",
+      "resolved": "https://registry.npmjs.org/js-git/-/js-git-0.7.7.tgz",
+      "dependencies": {
+        "bodec": {
+          "version": "0.1.0",
+          "from": "bodec@0.1.0",
+          "resolved": "https://registry.npmjs.org/bodec/-/bodec-0.1.0.tgz"
+        },
+        "culvert": {
+          "version": "0.1.2",
+          "from": "culvert@0.1.2",
+          "resolved": "https://registry.npmjs.org/culvert/-/culvert-0.1.2.tgz"
+        },
+        "git-sha1": {
+          "version": "0.1.2",
+          "from": "git-sha1@0.1.2",
+          "resolved": "https://registry.npmjs.org/git-sha1/-/git-sha1-0.1.2.tgz"
+        },
+        "pako": {
+          "version": "0.2.5",
+          "from": "pako@0.2.5",
+          "resolved": "https://registry.npmjs.org/pako/-/pako-0.2.5.tgz"
+        }
+      }
     },
     "lodash-contrib": {
       "version": "241.4.14",
-        "from": "lodash-contrib@*",
-        "resolved": "https://registry.npmjs.org/lodash-contrib/-/lodash-contrib-241.4.14.tgz",
-        "dependencies": {
-            "lodash": {
-                "version": "2.4.1",
-                "from": "lodash@2.4.1",
-                "resolved": "https://registry.npmjs.org/lodash/-/lodash-2.4.1.tgz"
-            }
+      "from": "lodash-contrib@*",
+      "resolved": "https://registry.npmjs.org/lodash-contrib/-/lodash-contrib-241.4.14.tgz",
+      "dependencies": {
+        "lodash": {
+          "version": "2.4.1",
+          "from": "lodash@2.4.1",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-2.4.1.tgz"
         }
+      }
     },
     "mpromise": {
-        "version": "0.5.5",
-        "from": "mpromise@latest"
+      "version": "0.5.5",
+      "from": "mpromise@latest"
     },
     "mquery": {
-        "version": "1.2.0",
-        "from": "mquery@*",
-        "resolved": "https://registry.npmjs.org/mquery/-/mquery-1.2.0.tgz",
+      "version": "1.2.1",
+      "from": "mquery@1.2.1",
+      "resolved": "https://registry.npmjs.org/mquery/-/mquery-1.2.1.tgz",
       "dependencies": {
-          "bluebird": {
-              "version": "2.3.2",
-              "from": "bluebird@2.3.2",
-              "resolved": "https://registry.npmjs.org/bluebird/-/bluebird-2.3.2.tgz"
+        "bluebird": {
+          "version": "2.3.2",
+          "from": "bluebird@2.3.2",
+          "resolved": "https://registry.npmjs.org/bluebird/-/bluebird-2.3.2.tgz"
         },
         "debug": {
           "version": "0.7.4",
@@ -131,30 +136,30 @@
         "regexp-clone": {
           "version": "0.0.1",
           "from": "regexp-clone@0.0.1",
-            "resolved": "https://registry.npmjs.org/regexp-clone/-/regexp-clone-0.0.1.tgz"
+          "resolved": "https://registry.npmjs.org/regexp-clone/-/regexp-clone-0.0.1.tgz"
         },
-          "sliced": {
-              "version": "0.0.5",
-              "from": "sliced@0.0.5",
-              "resolved": "https://registry.npmjs.org/sliced/-/sliced-0.0.5.tgz"
+        "sliced": {
+          "version": "0.0.5",
+          "from": "sliced@0.0.5",
+          "resolved": "https://registry.npmjs.org/sliced/-/sliced-0.0.5.tgz"
         }
       }
     },
     "rimraf": {
       "version": "2.2.8",
-        "from": "rimraf@latest",
+      "from": "rimraf@latest",
       "resolved": "http://registry.npmjs.org/rimraf/-/rimraf-2.2.8.tgz"
     },
     "safe": {
       "version": "0.1.4",
-        "from": "safe@*",
-        "resolved": "https://registry.npmjs.org/safe/-/safe-0.1.4.tgz"
+      "from": "safe@*",
+      "resolved": "https://registry.npmjs.org/safe/-/safe-0.1.4.tgz"
     },
     "sift": {
-      "version": "0.0.18",
-        "from": "sift@latest",
-      "resolved": "http://github.com/crcn/sift.js/archive/master.tar.gz"
+      "version": "0.1.0",
+      "from": "sift@0.1.0",
+      "resolved": "https://registry.npmjs.org/sift/-/sift-0.1.0.tgz"
     }
   },
-    "problems": null
+  "problems": null
 }
