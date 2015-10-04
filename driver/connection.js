@@ -24,6 +24,7 @@ Connection.prototype.collection = function (name, options) {
 var dbs = {};
 
 Connection.prototype.open = function (uri, cb) {
+    this.config = {autoIndex: false};
     var self = this;
     cb = _.isFunction(cb) ? cb : _.noop;
 

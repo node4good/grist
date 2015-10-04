@@ -23,10 +23,10 @@
     "istanbul": "",
     "lorem-ipsum": "",
     "mocha": "",
-    "mongoose": "^2.9.10"
+    "mongoose": ""
   },
   "engines": {
-    "node": ">= 0.10.x"
+    "node": "4"
   },
   "jshintConfig": {
     "forin": true,
