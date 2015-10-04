@@ -6,8 +6,9 @@
     <envs>
       <env name="MONGOOSE_TEST_URI" value="puny://test-mongoose" />
     </envs>
-    <ui>BDD</ui>
+    <ui>bdd</ui>
     <extra-mocha-options />
+    <test-kind>DIRECTORY</test-kind>
     <test-directory>$3RD_WORK_ROOT$/mongoose/test</test-directory>
     <recursive>false</recursive>
     <RunnerSettings RunnerId="MochaDebugRunner" />
