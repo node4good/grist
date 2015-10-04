@@ -26,7 +26,7 @@ describe('Compact', function () {
                     items = _.times(100, function (n) {
                         return { k: n, v: _.random(100) };
                     });
-                    return coll.insert(items, { w: 1 }, done);
+                    return coll.insert(items, {w: 1});
                 }
             ).onResolve(done);
         });
