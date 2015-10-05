@@ -71,7 +71,6 @@
   "repository": "TheNodeILs/grist",
   "scripts": {
     "cover": "istanbul cover node_modules/mocha/bin/_mocha",
-    "postpublish": "git push origin master --tags",
     "test": "mocha"
   },
   "version": "1.3.0"

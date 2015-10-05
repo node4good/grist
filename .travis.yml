@@ -1,2 +1,10 @@
 sudo: false
 language: node_js
+deploy:
+  provider: npm
+  email: me@refack.com
+  api_key:
+    secure: VRT1RIeRJBF6QPSA6pnsUbJdBGE++HMyc9tXdov/v194UcgAMbPO7htHRNL2aDayyVSMKfYMuaggvlOWkBgqnMDW4C9/V/ghnyihpAjuhDqdHKKqjo5o+0x2iyqt1ZRfN9PYtcFMW8ohjGucUK2NjTXhuoe6WYOnGqso0VnAEC8=
+  on:
+    tags: true
+    repo: TheNodeILs/grist
