@@ -150,9 +150,9 @@
       "resolved": "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.2.tgz"
     },
     "escodegen": {
-      "version": "1.6.1",
-      "from": "escodegen@>=1.6.0 <1.7.0",
-      "resolved": "https://registry.npmjs.org/escodegen/-/escodegen-1.6.1.tgz",
+      "version": "1.7.0",
+      "from": "escodegen@>=1.7.0 <1.8.0",
+      "resolved": "https://registry.npmjs.org/escodegen/-/escodegen-1.7.0.tgz",
       "dependencies": {
         "esprima": {
           "version": "1.2.5",
@@ -172,9 +172,9 @@
       "resolved": "https://registry.npmjs.org/estraverse/-/estraverse-1.9.3.tgz"
     },
     "esutils": {
-      "version": "1.1.6",
-      "from": "esutils@>=1.1.6 <2.0.0",
-      "resolved": "https://registry.npmjs.org/esutils/-/esutils-1.1.6.tgz"
+      "version": "2.0.2",
+      "from": "esutils@>=2.0.2 <3.0.0",
+      "resolved": "https://registry.npmjs.org/esutils/-/esutils-2.0.2.tgz"
     },
     "fast-levenshtein": {
       "version": "1.0.7",
@@ -320,9 +320,9 @@
       "resolved": "https://registry.npmjs.org/kareem/-/kareem-1.0.1.tgz"
     },
     "kerberos": {
-      "version": "0.0.14",
+      "version": "0.0.15",
       "from": "kerberos@>=0.0.0 <0.1.0",
-      "resolved": "https://registry.npmjs.org/kerberos/-/kerberos-0.0.14.tgz"
+      "resolved": "https://registry.npmjs.org/kerberos/-/kerberos-0.0.15.tgz"
     },
     "levn": {
       "version": "0.2.5",
@@ -487,14 +487,14 @@
       "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.4.3.tgz"
     },
     "safe": {
-      "version": "0.3.4",
+      "version": "0.3.5",
       "from": "safe@*",
-      "resolved": "https://registry.npmjs.org/safe/-/safe-0.3.4.tgz"
+      "resolved": "https://registry.npmjs.org/safe/-/safe-0.3.5.tgz"
     },
     "sift": {
-      "version": "2.0.8",
+      "version": "2.0.9",
       "from": "sift@latest",
-      "resolved": "https://registry.npmjs.org/sift/-/sift-2.0.8.tgz"
+      "resolved": "https://registry.npmjs.org/sift/-/sift-2.0.9.tgz"
     },
     "sigmund": {
       "version": "1.0.1",
@@ -507,9 +507,9 @@
       "resolved": "https://registry.npmjs.org/sliced/-/sliced-0.0.5.tgz"
     },
     "source-map": {
-      "version": "0.1.43",
-      "from": "source-map@>=0.1.40 <0.2.0",
-      "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.1.43.tgz"
+      "version": "0.2.0",
+      "from": "source-map@>=0.2.0 <0.3.0",
+      "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.2.0.tgz"
     },
     "sprintf-js": {
       "version": "1.0.3",

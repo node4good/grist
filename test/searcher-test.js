@@ -398,8 +398,8 @@ describe('Search', function () {
         });
         it("find {num:{$not:{$ne:10}}} (index)", function (done) {
             collection.find({num: {$not: {$ne: 10}}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, 1);
-                assert.equal(docs[0].num, 10);
+                assert.equal(docs.length, 144);
+                assert.equal(docs[2].num, 10);
                 done();
             }));
         });
@@ -491,7 +491,7 @@ describe('Search', function () {
         });
         it("find {num:{$ne:10}} (index)", function (done) {
             collection.find({num: {$ne: 10}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, NUMBER_OF_DOCS - 1);
+                assert.equal(docs.length, NUMBER_OF_DOCS - 144);
                 _.each(docs, function (doc) {
                     assert.ok(doc.num != 10);
                 });
@@ -500,7 +500,7 @@ describe('Search', function () {
         });
         it("find {num:{$not:{$eq:10}}} (index)", function (done) {
             collection.find({num: {$ne: 10}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, NUMBER_OF_DOCS - 1);
+                assert.equal(docs.length, NUMBER_OF_DOCS - 144);
                 _.each(docs, function (doc) {
                     assert.ok(doc.num != 10);
                 });
@@ -509,7 +509,7 @@ describe('Search', function () {
         });
         it("find {pum:{$ne:10}} (no index)", function (done) {
             collection.find({pum: {$ne: 10}}).toArray(safe.sure(done, function (docs) {
-                assert.equal(docs.length, NUMBER_OF_DOCS - 1);
+                assert.equal(docs.length, NUMBER_OF_DOCS - 144);
                 _.each(docs, function (doc) {
                     assert.ok(doc.pum != 10);
                 });
