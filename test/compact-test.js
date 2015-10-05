@@ -213,20 +213,13 @@ describe('Compact', function () {
             var Db = tingodb;
             var db;
             try {
-                db = new Db('/tmp/some_unexistant_path_667676qwe', {});
+                db = new Db('/tmp/some_unexistant_path_667676qwe/some_unexistant_path_667676qwe', {});
             } catch (e) {
                 assert(e);
                 done();
                 return;
             }
-            var c = db.collection('test');
-            c.remove({}, function (err) {
-                assert(err);
-                c.insert({  name: 'Chiara', surname: 'Mobily', age: 22 }, function (err) {
-                    assert(err);
-                    done();
-                });
-            });
+            done(new Error("Opening a non existent path should fail.", db));
         });
     });
 
