@@ -10,11 +10,11 @@ require('./driver/common').getMongoose();
 var num = 100;
 var gt0sin = 0;
 var _dt = null;
-var _id = null;
 
 
 describe('Potus', function () {
     before(function (done) {
+        this.timeout(10000);
         var Team = this.coll = require('./fixtures/team.js');
         this.coll.collection.drop().then(function () {
             gt0sin = 0;
